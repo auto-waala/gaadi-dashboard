@@ -112,7 +112,7 @@ const Index = () => {
 
       <footer className="border-t border-border bg-secondary/40 py-8">
         <div className="container text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} GaadiBazaar — Pakistan's flexible classifieds marketplace.
+          © {new Date().getFullYear()} GaadiBazaar — India's flexible classifieds marketplace.
         </div>
       </footer>
     </div>

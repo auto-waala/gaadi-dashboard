@@ -33,7 +33,7 @@ export const Header = () => {
         <div className="hidden flex-1 items-center gap-2 md:flex">
           <div className="flex h-11 items-center gap-2 rounded-lg border border-input bg-secondary/60 px-3 min-w-[160px]">
             <MapPin className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-medium">Pakistan</span>
+            <span className="text-sm font-medium">India</span>
           </div>
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />

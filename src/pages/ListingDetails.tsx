@@ -187,7 +187,7 @@ const ListingDetails = () => {
               Posted in
             </h3>
             <div className="mt-2 flex items-center gap-2 text-sm">
-              <MapPin className="h-4 w-4 text-primary" /> {listing.location}, Pakistan
+              <MapPin className="h-4 w-4 text-primary" /> {listing.location}, India
             </div>
           </div>
         </aside>
