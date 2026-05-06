@@ -1,27 +1,27 @@
 import {
   Bike,
-  Briefcase,
+  Bus,
   Car,
-  Gamepad2,
-  Home,
-  Shirt,
-  Smartphone,
-  Sofa,
-  Tv,
+  Caravan,
+  Tractor,
+  Truck,
+  Zap,
+  Ship,
+  Plane,
   Wrench,
 } from "lucide-react";
 
 const cats = [
   { icon: Car, label: "Cars" },
+  { icon: Zap, label: "EVs" },
   { icon: Bike, label: "Bikes" },
-  { icon: Smartphone, label: "Mobiles" },
-  { icon: Home, label: "Property" },
-  { icon: Tv, label: "Electronics" },
-  { icon: Sofa, label: "Furniture" },
-  { icon: Shirt, label: "Fashion" },
-  { icon: Briefcase, label: "Jobs" },
-  { icon: Wrench, label: "Services" },
-  { icon: Gamepad2, label: "Hobbies" },
+  { icon: Bike, label: "Cycles" },
+  { icon: Truck, label: "Trucks" },
+  { icon: Tractor, label: "Tractors" },
+  { icon: Bus, label: "Buses" },
+  { icon: Caravan, label: "Auto/Rickshaw" },
+  { icon: Ship, label: "Boats" },
+  { icon: Wrench, label: "Spare Parts" },
 ];
 
 export const CategoryGrid = () => {
