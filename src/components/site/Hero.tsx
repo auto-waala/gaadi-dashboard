@@ -26,13 +26,16 @@ export const Hero = () => {
 
       <div className="container relative grid gap-8 py-10 md:grid-cols-2 md:py-20">
         <div className="space-y-5">
-          <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
-            #1 Marketplace in India
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-india-green" /> Made in India · #1 Marketplace
           </span>
           <h1 className="text-3xl font-extrabold leading-tight tracking-tight md:text-5xl">
-            Find your <span className="text-primary">right ride</span>
+            <span className="text-primary">Buy.</span> Sell.{" "}
+            <span className="text-india-green">Trust.</span>
             <br />
-            at the <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">best price</span>
+            <span className="bg-gradient-to-r from-primary via-foreground to-india-green bg-clip-text text-transparent">
+              Drive what's next.
+            </span>
           </h1>
           <p className="max-w-md text-muted-foreground">
             Thousands of verified cars, bikes and more — all in one flexible

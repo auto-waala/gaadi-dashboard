@@ -19,18 +19,31 @@ const categories = [
 export const Header = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="h-1 bg-tricolor" />
       <div className="container flex h-16 items-center gap-3 md:gap-6">
         <Button variant="ghost" size="icon" className="md:hidden">
           <Menu className="h-5 w-5" />
         </Button>
 
-        <Link to="/" className="flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary-glow text-primary-foreground font-black shadow-elegant">
-            G
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl shadow-elegant">
+            <div className="absolute inset-0 flex flex-col">
+              <div className="h-1/3 bg-primary" />
+              <div className="h-1/3 bg-white" />
+              <div className="h-1/3 bg-india-green" />
+            </div>
+            <span className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-black text-chakra ring-1 ring-chakra/40">
+              ☸
+            </span>
           </div>
-          <span className="hidden text-lg font-bold tracking-tight sm:inline">
-            Gaadi<span className="text-primary">Bazaar</span>
-          </span>
+          <div className="hidden flex-col leading-none sm:flex">
+            <span className="text-lg font-extrabold tracking-tight">
+              Auto<span className="text-primary">Next</span>
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+              Buy · Sell · <span className="text-india-green">Trust</span>
+            </span>
+          </div>
         </Link>
 
         <div className="hidden flex-1 items-center gap-2 md:flex">
@@ -68,7 +81,7 @@ export const Header = () => {
       <div className="border-t border-border bg-background px-4 py-2 md:hidden">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input placeholder="Search GaadiBazaar..." className="h-10 pl-10" />
+          <Input placeholder="Search AutoNext..." className="h-10 pl-10" />
         </div>
       </div>
 

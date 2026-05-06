@@ -137,7 +137,7 @@ export const LoginMenu = () => {
           <p className="text-xs text-muted-foreground">
             {mode === "login"
               ? "Login to manage your listings & favorites"
-              : "Join GaadiBazaar in less than a minute"}
+              : "Join AutoNext in less than a minute"}
           </p>
         </div>
 
@@ -193,7 +193,7 @@ export const LoginMenu = () => {
         <p className="mt-4 text-center text-xs text-muted-foreground">
           {mode === "login" ? (
             <>
-              New to GaadiBazaar?{" "}
+              New to AutoNext?{" "}
               <button type="button" onClick={() => setMode("register")} className="font-semibold text-primary hover:underline">
                 Create an account
               </button>

@@ -31,7 +31,7 @@ const Auth = () => {
         <div className="w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-card">
           <div className="mb-6 text-center">
             <h1 className="text-2xl font-bold">
-              {mode === "forgot" ? "Reset password" : "Welcome to GaadiBazaar"}
+              {mode === "forgot" ? "Reset password" : "Welcome to AutoNext"}
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
               {mode === "forgot"
