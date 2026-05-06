@@ -38,9 +38,9 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <CategoryGrid />
+        <CategoryGrid active={type} onChange={setType} />
 
-        <section className="container pb-16">
+        <section id="listings" className="container pb-16">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
               <h2 className="text-2xl font-bold tracking-tight">
