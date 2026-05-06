@@ -80,7 +80,7 @@ export const Header = () => {
       <div className="border-t border-border bg-background px-4 py-2 md:hidden">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input placeholder="Search GaadiBazaar..." className="h-10 pl-10" />
+          <Input placeholder="Search AutoNext..." className="h-10 pl-10" />
         </div>
       </div>
 
