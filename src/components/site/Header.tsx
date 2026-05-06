@@ -19,6 +19,7 @@ const categories = [
 export const Header = () => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="h-1 bg-tricolor" />
       <div className="container flex h-16 items-center gap-3 md:gap-6">
         <Button variant="ghost" size="icon" className="md:hidden">
           <Menu className="h-5 w-5" />
