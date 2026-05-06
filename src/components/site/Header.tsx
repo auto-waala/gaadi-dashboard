@@ -1,6 +1,7 @@
-import { Heart, MapPin, Menu, Plus, Search, User } from "lucide-react";
+import { LoginMenu } from "@/components/site/LoginMenu";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Heart, MapPin, Menu, Plus, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const categories = [
@@ -56,9 +57,7 @@ export const Header = () => {
           <Button variant="ghost" size="icon" aria-label="Favorites">
             <Heart className="h-5 w-5" />
           </Button>
-          <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
-            <User className="mr-1 h-4 w-4" /> Login
-          </Button>
+          <LoginMenu />
           <Button size="sm" variant="hero">
             <Plus className="mr-1 h-4 w-4" /> SELL
           </Button>
