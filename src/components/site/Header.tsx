@@ -6,11 +6,13 @@ import { Link } from "react-router-dom";
 const categories = [
   "All Categories",
   "Cars",
+  "EVs",
   "Bikes",
-  "Mobiles",
-  "Property",
-  "Electronics",
-  "Jobs",
+  "Cycles",
+  "Trucks",
+  "Tractors",
+  "Buses",
+  "Spare Parts",
 ];
 
 export const Header = () => {

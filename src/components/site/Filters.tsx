@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { useState } from "react";
 
-const types = ["All", "SUV", "Hatchback", "Sedan", "Bike"];
+const types = ["All", "Cars", "EV", "Bikes", "Cycles", "Trucks", "Tractors", "Buses"];
 const fuels = ["Petrol", "Diesel", "Electric", "Hybrid"];
 
 export const Filters = ({
