@@ -10,10 +10,22 @@ import { User } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
+type Mode = "login" | "register";
+
 export const LoginMenu = () => {
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState<Mode>("login");
+
+  // login fields
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [open, setOpen] = useState(false);
+
+  // register fields
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [regEmail, setRegEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [regPassword, setRegPassword] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,16 +33,38 @@ export const LoginMenu = () => {
       toast({ title: "Please fill in both fields" });
       return;
     }
-    toast({ title: "Login is not connected yet", description: "Enable Lovable Cloud to wire up real authentication." });
+    toast({
+      title: "Login is not connected yet",
+      description: "Enable Lovable Cloud to wire up real authentication.",
+    });
+    setOpen(false);
+  };
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!firstName || !lastName || !regEmail || !phone || !regPassword) {
+      toast({ title: "Please fill all fields" });
+      return;
+    }
+    toast({
+      title: "Registration is not connected yet",
+      description: "Enable Lovable Cloud to wire up real signup.",
+    });
     setOpen(false);
   };
 
   const handleSocial = (provider: string) => {
-    toast({ title: `${provider} login coming soon` });
+    toast({ title: `${provider} ${mode === "login" ? "login" : "signup"} coming soon` });
   };
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
+    <Popover
+      open={open}
+      onOpenChange={(o) => {
+        setOpen(o);
+        if (!o) setMode("login");
+      }}
+    >
       <PopoverTrigger asChild>
         <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
           <User className="mr-1 h-4 w-4" /> Login
@@ -38,52 +72,129 @@ export const LoginMenu = () => {
       </PopoverTrigger>
       <PopoverContent align="end" className="w-80 p-5">
         <div className="mb-4">
-          <h3 className="text-base font-bold">Welcome back</h3>
+          <h3 className="text-base font-bold">
+            {mode === "login" ? "Welcome back" : "Create your account"}
+          </h3>
           <p className="text-xs text-muted-foreground">
-            Login to manage your listings & favorites
+            {mode === "login"
+              ? "Login to manage your listings & favorites"
+              : "Join GaadiBazaar in less than a minute"}
           </p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-3">
-          <div className="space-y-1.5">
-            <Label htmlFor="login-email" className="text-xs">
-              Email
-            </Label>
-            <Input
-              id="login-email"
-              type="email"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-10"
-            />
-          </div>
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between">
-              <Label htmlFor="login-password" className="text-xs">
+        {mode === "login" ? (
+          <form onSubmit={handleLogin} className="space-y-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="login-email" className="text-xs">
+                Email
+              </Label>
+              <Input
+                id="login-email"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-10"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="login-password" className="text-xs">
+                  Password
+                </Label>
+                <button
+                  type="button"
+                  className="text-xs font-medium text-primary hover:underline"
+                  onClick={() => toast({ title: "Reset link coming soon" })}
+                >
+                  Forgot?
+                </button>
+              </div>
+              <Input
+                id="login-password"
+                type="password"
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="h-10"
+              />
+            </div>
+            <Button type="submit" variant="hero" className="w-full">
+              Login
+            </Button>
+          </form>
+        ) : (
+          <form onSubmit={handleRegister} className="space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="reg-first" className="text-xs">
+                  First name
+                </Label>
+                <Input
+                  id="reg-first"
+                  placeholder="John"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="h-10"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="reg-last" className="text-xs">
+                  Last name
+                </Label>
+                <Input
+                  id="reg-last"
+                  placeholder="Doe"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="h-10"
+                />
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="reg-email" className="text-xs">
+                Email
+              </Label>
+              <Input
+                id="reg-email"
+                type="email"
+                placeholder="you@example.com"
+                value={regEmail}
+                onChange={(e) => setRegEmail(e.target.value)}
+                className="h-10"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="reg-phone" className="text-xs">
+                Phone
+              </Label>
+              <Input
+                id="reg-phone"
+                type="tel"
+                placeholder="+91 98765 43210"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                className="h-10"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="reg-password" className="text-xs">
                 Password
               </Label>
-              <button
-                type="button"
-                className="text-xs font-medium text-primary hover:underline"
-                onClick={() => toast({ title: "Reset link coming soon" })}
-              >
-                Forgot?
-              </button>
+              <Input
+                id="reg-password"
+                type="password"
+                placeholder="Create a password"
+                value={regPassword}
+                onChange={(e) => setRegPassword(e.target.value)}
+                className="h-10"
+              />
             </div>
-            <Input
-              id="login-password"
-              type="password"
-              placeholder="••••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="h-10"
-            />
-          </div>
-          <Button type="submit" variant="hero" className="w-full">
-            Login
-          </Button>
-        </form>
+            <Button type="submit" variant="hero" className="w-full">
+              Create account
+            </Button>
+          </form>
+        )}
 
         <div className="my-4 flex items-center gap-2">
           <span className="h-px flex-1 bg-border" />
@@ -133,17 +244,29 @@ export const LoginMenu = () => {
         </div>
 
         <p className="mt-4 text-center text-xs text-muted-foreground">
-          New to GaadiBazaar?{" "}
-          <button
-            type="button"
-            onClick={() => {
-              setOpen(false);
-              toast({ title: "Registration coming soon" });
-            }}
-            className="font-semibold text-primary hover:underline"
-          >
-            Create an account
-          </button>
+          {mode === "login" ? (
+            <>
+              New to GaadiBazaar?{" "}
+              <button
+                type="button"
+                onClick={() => setMode("register")}
+                className="font-semibold text-primary hover:underline"
+              >
+                Create an account
+              </button>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <button
+                type="button"
+                onClick={() => setMode("login")}
+                className="font-semibold text-primary hover:underline"
+              >
+                Login
+              </button>
+            </>
+          )}
         </p>
       </PopoverContent>
     </Popover>
