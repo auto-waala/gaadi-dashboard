@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Heart, MapPin, Menu, Plus, Search } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo-autonext.png";
 
 const categories = [
   "All Categories",
@@ -26,16 +27,13 @@ export const Header = () => {
         </Button>
 
         <Link to="/" className="flex items-center gap-2.5">
-          <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-xl shadow-elegant">
-            <div className="absolute inset-0 flex flex-col">
-              <div className="h-1/3 bg-primary" />
-              <div className="h-1/3 bg-white" />
-              <div className="h-1/3 bg-india-green" />
-            </div>
-            <span className="relative z-10 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-black text-chakra ring-1 ring-chakra/40">
-              ☸
-            </span>
-          </div>
+          <img
+            src={logo}
+            alt="AutoNext logo — car, truck and bike in Indian flag colors"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-xl bg-white object-contain shadow-elegant ring-1 ring-border"
+          />
           <div className="hidden flex-col leading-none sm:flex">
             <span className="text-lg font-extrabold tracking-tight">
               Auto<span className="text-primary">Next</span>
@@ -71,8 +69,10 @@ export const Header = () => {
             <Heart className="h-5 w-5" />
           </Button>
           <LoginMenu />
-          <Button size="sm" variant="hero">
-            <Plus className="mr-1 h-4 w-4" /> SELL
+          <Button size="sm" variant="hero" asChild>
+            <Link to="/sell">
+              <Plus className="mr-1 h-4 w-4" /> SELL
+            </Link>
           </Button>
         </div>
       </div>
