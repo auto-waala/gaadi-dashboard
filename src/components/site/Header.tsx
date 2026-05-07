@@ -1,8 +1,17 @@
 import { LoginMenu } from "@/components/site/LoginMenu";
+import { SearchBox } from "@/components/site/SearchBox";
+import { LocationPicker } from "@/components/site/LocationPicker";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Heart, MapPin, Menu, Plus, Search } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Heart, Menu, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 import logo from "@/assets/logo-autonext.png";
 
 const categories = [
@@ -18,13 +27,62 @@ const categories = [
 ];
 
 export const Header = () => {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="h-1 bg-tricolor" />
       <div className="container flex h-16 items-center gap-3 md:gap-6">
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu className="h-5 w-5" />
-        </Button>
+        <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Menu">
+              <Menu className="h-5 w-5" />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-[300px] p-0">
+            <SheetHeader className="border-b border-border p-4">
+              <SheetTitle className="flex items-center gap-2">
+                <img src={logo} alt="" className="h-8 w-8" />
+                <span className="text-base font-extrabold">
+                  Auto<span className="text-primary">Next</span>
+                </span>
+              </SheetTitle>
+            </SheetHeader>
+            <div className="p-4">
+              <LocationPicker />
+            </div>
+            <nav className="flex flex-col px-2 pb-4">
+              <span className="px-3 pb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                Categories
+              </span>
+              {categories.map((c) => (
+                <a
+                  key={c}
+                  href="#"
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+                >
+                  {c}
+                </a>
+              ))}
+              <div className="my-3 border-t border-border" />
+              <Link
+                to="/sell"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-md px-3 py-2 text-sm font-semibold text-primary hover:bg-accent"
+              >
+                + Sell your vehicle
+              </Link>
+              <Link
+                to="/auth"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+              >
+                Login / Register
+              </Link>
+            </nav>
+          </SheetContent>
+        </Sheet>
 
         <Link to="/" className="flex items-center gap-2.5">
           <img
@@ -45,23 +103,8 @@ export const Header = () => {
         </Link>
 
         <div className="hidden flex-1 items-center gap-2 md:flex">
-          <div className="flex h-11 items-center gap-2 rounded-lg border border-input bg-secondary/60 px-3 min-w-[160px]">
-            <MapPin className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm font-medium">India</span>
-          </div>
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input
-              placeholder="Find Cars, Bikes, Mobiles and more..."
-              className="h-11 pl-10 pr-24"
-            />
-            <Button
-              size="sm"
-              className="absolute right-1 top-1/2 h-9 -translate-y-1/2 px-4"
-            >
-              Search
-            </Button>
-          </div>
+          <LocationPicker />
+          <SearchBox />
         </div>
 
         <div className="ml-auto flex items-center gap-1 md:gap-2">
@@ -79,10 +122,7 @@ export const Header = () => {
 
       {/* Mobile search */}
       <div className="border-t border-border bg-background px-4 py-2 md:hidden">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input placeholder="Search AutoNext..." className="h-10 pl-10" />
-        </div>
+        <SearchBox compact />
       </div>
 
       {/* Category strip */}
