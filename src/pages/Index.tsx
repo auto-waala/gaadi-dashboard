@@ -1,6 +1,7 @@
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { NewArrivals } from "@/components/site/NewArrivals";
+import { BrandCategories } from "@/components/site/BrandCategories";
 import { Footer } from "@/components/site/Footer";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
 import { ListingCard } from "@/components/site/ListingCard";
@@ -42,6 +43,7 @@ const Index = () => {
         <Hero />
         <NewArrivals />
         <CategoryGrid active={type} onChange={setType} />
+        <BrandCategories />
 
         <section id="listings" className="container pb-16">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
