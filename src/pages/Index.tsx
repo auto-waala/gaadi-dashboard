@@ -1,5 +1,7 @@
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
+import { NewArrivals } from "@/components/site/NewArrivals";
+import { Footer } from "@/components/site/Footer";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
 import { ListingCard } from "@/components/site/ListingCard";
 import { Filters } from "@/components/site/Filters";
@@ -38,6 +40,7 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <NewArrivals />
         <CategoryGrid active={type} onChange={setType} />
 
         <section id="listings" className="container pb-16">
@@ -110,11 +113,7 @@ const Index = () => {
         </section>
       </main>
 
-      <footer className="border-t border-border bg-secondary/40 py-8">
-        <div className="container text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} AutoNext — India's flexible classifieds marketplace.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
