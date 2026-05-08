@@ -41,11 +41,12 @@ export const Header = () => {
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] p-0">
             <SheetHeader className="border-b border-border p-4">
-              <SheetTitle className="flex items-center gap-2">
-                <img src={logo} alt="" className="h-8 w-8" />
-                <span className="text-base font-extrabold">
-                  Auto<span className="text-primary">Next</span>
-                </span>
+              <SheetTitle className="flex items-center justify-center">
+                <img
+                  src={logo}
+                  alt="AutoNext logo"
+                  className="h-12 w-auto object-contain"
+                />
               </SheetTitle>
             </SheetHeader>
             <div className="p-4">
@@ -84,22 +85,12 @@ export const Header = () => {
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center">
           <img
             src={logo}
             alt="AutoNext logo — car, truck and bike in Indian flag colors"
-            width={44}
-            height={44}
-            className="h-11 w-11 rounded-xl bg-white object-contain shadow-elegant ring-1 ring-border"
+            className="h-14 w-auto object-contain"
           />
-          <div className="hidden flex-col leading-none sm:flex">
-            <span className="text-lg font-extrabold tracking-tight">
-              Auto<span className="text-primary">Next</span>
-            </span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-              Buy · Sell · <span className="text-india-green">Trust</span>
-            </span>
-          </div>
         </Link>
 
         <div className="hidden flex-1 items-center gap-2 md:flex">
