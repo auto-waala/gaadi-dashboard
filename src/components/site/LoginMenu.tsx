@@ -60,6 +60,10 @@ export const LoginMenu = () => {
             Signed in
           </DropdownMenuItem>
           <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={() => navigate("/dashboard")}>
+            <User className="mr-2 h-4 w-4" /> Seller dashboard
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuItem
             onClick={async () => {
               await signOut();

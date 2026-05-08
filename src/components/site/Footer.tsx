@@ -5,24 +5,66 @@ import logo from "@/assets/logo-autonext.png";
 const cols = [
   {
     title: "Popular Categories",
-    links: ["Cars", "Bikes", "EVs", "Trucks", "Tractors", "Buses", "Spare Parts", "Cycles"],
+    links: [
+      { label: "Cars", href: "/category/cars" },
+      { label: "Bikes", href: "/category/bikes" },
+      { label: "EVs", href: "/category/ev" },
+      { label: "Trucks", href: "/category/trucks" },
+      { label: "Tractors", href: "/category/tractors" },
+      { label: "Buses", href: "/category/buses" },
+      { label: "Spare Parts", href: "/category/spare-parts" },
+      { label: "Cycles", href: "/category/cycles" },
+    ],
   },
   {
     title: "Trending Searches",
-    links: ["Maruti Swift", "Hyundai Creta", "Royal Enfield", "Tata Nexon EV", "KTM Duke", "Mahindra Thar"],
+    links: [
+      { label: "Maruti Swift", href: "/category/cars?brand=Maruti" },
+      { label: "Hyundai Creta", href: "/category/cars?brand=Hyundai" },
+      { label: "Royal Enfield", href: "/category/bikes?brand=Royal%20Enfield" },
+      { label: "Tata Nexon EV", href: "/category/ev?brand=Tata" },
+      { label: "KTM Duke", href: "/category/bikes?brand=KTM" },
+      { label: "Mahindra Thar", href: "/category/cars?brand=Mahindra" },
+    ],
   },
   {
     title: "About AutoNext",
-    links: ["About Us", "Careers", "Press", "AutoNext Cares", "Blog"],
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Careers", href: "/careers" },
+      { label: "Press", href: "/press" },
+      { label: "AutoNext Cares", href: "/cares" },
+      { label: "Blog", href: "/blog" },
+    ],
   },
   {
     title: "AutoNext Help",
-    links: ["Help Center", "Safety Tips", "Stay Safe Online", "Sitemap", "Legal & Policies"],
+    links: [
+      { label: "Help Center", href: "/help" },
+      { label: "Safety Tips", href: "/safety" },
+      { label: "Stay Safe Online", href: "/safety-online" },
+      { label: "Sitemap", href: "/sitemap" },
+      { label: "Legal & Policies", href: "/legal" },
+    ],
   },
   {
     title: "For Sellers",
-    links: ["Post Free Ad", "Member Plans", "Verify Your Listing", "Auto Loans", "Insurance"],
+    links: [
+      { label: "Post Free Ad", href: "/sell" },
+      { label: "Seller Dashboard", href: "/dashboard" },
+      { label: "Verify Your Listing", href: "/verify" },
+      { label: "Auto Loans", href: "/loans" },
+      { label: "Insurance", href: "/insurance" },
+    ],
   },
+];
+
+const socials = [
+  { Icon: Facebook, label: "Facebook", href: "https://www.facebook.com/autonext" },
+  { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/autonext" },
+  { Icon: Twitter, label: "Twitter / X", href: "https://twitter.com/autonext" },
+  { Icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@autonext" },
+  { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/autonext" },
 ];
 
 const cities = [
@@ -71,20 +113,20 @@ export const Footer = () => {
       {/* Link columns */}
       <div className="container grid gap-8 py-10 md:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-1">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="AutoNext logo" width={40} height={40} className="h-10 w-10 rounded-lg" />
-            <span className="text-lg font-extrabold">
-              Auto<span className="text-primary">Next</span>
-            </span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="AutoNext logo" className="h-14 w-auto object-contain" />
           </Link>
           <p className="mt-3 text-xs text-muted-foreground">
             India's flexible classifieds marketplace. Buy. Sell. Trust.
           </p>
           <div className="mt-4 flex gap-2">
-            {[Facebook, Instagram, Twitter, Youtube, Linkedin].map((Icon, i) => (
+            {socials.map(({ Icon, label, href }) => (
               <a
-                key={i}
-                href="#"
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-smooth hover:border-primary hover:text-primary"
               >
                 <Icon className="h-4 w-4" />
@@ -98,10 +140,10 @@ export const Footer = () => {
             <h4 className="mb-3 text-sm font-bold">{col.title}</h4>
             <ul className="space-y-2 text-sm">
               {col.links.map((l) => (
-                <li key={l}>
-                  <a href="#" className="text-muted-foreground hover:text-primary">
-                    {l}
-                  </a>
+                <li key={l.label}>
+                  <Link to={l.href} className="text-muted-foreground hover:text-primary">
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>

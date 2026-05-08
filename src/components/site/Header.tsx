@@ -15,15 +15,15 @@ import { useState } from "react";
 import logo from "@/assets/logo-autonext.png";
 
 const categories = [
-  "All Categories",
-  "Cars",
-  "EVs",
-  "Bikes",
-  "Cycles",
-  "Trucks",
-  "Tractors",
-  "Buses",
-  "Spare Parts",
+  { label: "All Categories", slug: "" },
+  { label: "Cars", slug: "cars" },
+  { label: "EVs", slug: "ev" },
+  { label: "Bikes", slug: "bikes" },
+  { label: "Cycles", slug: "cycles" },
+  { label: "Trucks", slug: "trucks" },
+  { label: "Tractors", slug: "tractors" },
+  { label: "Buses", slug: "buses" },
+  { label: "Spare Parts", slug: "spare-parts" },
 ];
 
 export const Header = () => {
@@ -41,11 +41,12 @@ export const Header = () => {
           </SheetTrigger>
           <SheetContent side="left" className="w-[300px] p-0">
             <SheetHeader className="border-b border-border p-4">
-              <SheetTitle className="flex items-center gap-2">
-                <img src={logo} alt="" className="h-8 w-8" />
-                <span className="text-base font-extrabold">
-                  Auto<span className="text-primary">Next</span>
-                </span>
+              <SheetTitle className="flex items-center justify-center">
+                <img
+                  src={logo}
+                  alt="AutoNext logo"
+                  className="h-12 w-auto object-contain"
+                />
               </SheetTitle>
             </SheetHeader>
             <div className="p-4">
@@ -56,14 +57,14 @@ export const Header = () => {
                 Categories
               </span>
               {categories.map((c) => (
-                <a
-                  key={c}
-                  href="#"
+                <Link
+                  key={c.label}
+                  to={c.slug ? `/category/${c.slug}` : "/"}
                   onClick={() => setMobileOpen(false)}
                   className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
-                  {c}
-                </a>
+                  {c.label}
+                </Link>
               ))}
               <div className="my-3 border-t border-border" />
               <Link
@@ -84,22 +85,12 @@ export const Header = () => {
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center">
           <img
             src={logo}
             alt="AutoNext logo — car, truck and bike in Indian flag colors"
-            width={44}
-            height={44}
-            className="h-11 w-11 rounded-xl bg-white object-contain shadow-elegant ring-1 ring-border"
+            className="h-14 w-auto object-contain"
           />
-          <div className="hidden flex-col leading-none sm:flex">
-            <span className="text-lg font-extrabold tracking-tight">
-              Auto<span className="text-primary">Next</span>
-            </span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-              Buy · Sell · <span className="text-india-green">Trust</span>
-            </span>
-          </div>
         </Link>
 
         <div className="hidden flex-1 items-center gap-2 md:flex">
@@ -129,15 +120,15 @@ export const Header = () => {
       <nav className="border-t border-border bg-secondary/40">
         <div className="container flex items-center gap-1 overflow-x-auto py-2 text-sm">
           {categories.map((c, i) => (
-            <a
-              key={c}
-              href="#"
+            <Link
+              key={c.label}
+              to={c.slug ? `/category/${c.slug}` : "/"}
               className={`whitespace-nowrap rounded-full px-3 py-1.5 font-medium transition-smooth hover:bg-accent hover:text-accent-foreground ${
                 i === 0 ? "bg-primary text-primary-foreground hover:bg-primary" : "text-foreground/80"
               }`}
             >
-              {c}
-            </a>
+              {c.label}
+            </Link>
           ))}
         </div>
       </nav>
