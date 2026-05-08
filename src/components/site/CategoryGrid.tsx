@@ -8,17 +8,18 @@ import {
   Zap,
   Wrench,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const cats = [
-  { icon: Car, label: "Cars" },
-  { icon: Zap, label: "EV" },
-  { icon: Bike, label: "Bikes" },
-  { icon: Bike, label: "Cycles" },
-  { icon: Truck, label: "Trucks" },
-  { icon: Tractor, label: "Tractors" },
-  { icon: Bus, label: "Buses" },
-  { icon: Caravan, label: "Auto/Rickshaw" },
-  { icon: Wrench, label: "Spare Parts" },
+  { icon: Car, label: "Cars", slug: "cars" },
+  { icon: Zap, label: "EV", slug: "ev" },
+  { icon: Bike, label: "Bikes", slug: "bikes" },
+  { icon: Bike, label: "Cycles", slug: "cycles" },
+  { icon: Truck, label: "Trucks", slug: "trucks" },
+  { icon: Tractor, label: "Tractors", slug: "tractors" },
+  { icon: Bus, label: "Buses", slug: "buses" },
+  { icon: Caravan, label: "Auto/Rickshaw", slug: "auto-rickshaw" },
+  { icon: Wrench, label: "Spare Parts", slug: "spare-parts" },
 ];
 
 export const CategoryGrid = ({
@@ -28,6 +29,7 @@ export const CategoryGrid = ({
   active: string;
   onChange: (v: string) => void;
 }) => {
+  const navigate = useNavigate();
   return (
     <section className="container py-10">
       <div className="mb-6 flex items-end justify-between">
@@ -43,16 +45,14 @@ export const CategoryGrid = ({
         </button>
       </div>
       <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-9">
-        {cats.map(({ icon: Icon, label }) => {
+        {cats.map(({ icon: Icon, label, slug }) => {
           const isActive = active === label;
           return (
             <button
               key={label}
               onClick={() => {
                 onChange(label);
-                document
-                  .getElementById("listings")
-                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                navigate(`/category/${slug}`);
               }}
               className={`group flex flex-col items-center gap-2 rounded-xl border bg-card p-3 transition-smooth hover:-translate-y-1 hover:shadow-card ${
                 isActive
