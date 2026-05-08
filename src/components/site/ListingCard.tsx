@@ -1,6 +1,6 @@
 import { Heart, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
-import { formatPKR, type Listing } from "@/data/listings";
+import { formatINR, type Listing } from "@/data/listings";
 import { Badge } from "@/components/ui/badge";
 
 export const ListingCard = ({ listing }: { listing: Listing }) => {
@@ -33,7 +33,7 @@ export const ListingCard = ({ listing }: { listing: Listing }) => {
       <div className="flex flex-1 flex-col p-4">
         <div className="flex items-baseline justify-between gap-2">
           <span className="text-lg font-bold text-primary">
-            {formatPKR(listing.price)}
+            {formatINR(listing.price)}
           </span>
           <span className="text-xs text-muted-foreground">{listing.year}</span>
         </div>

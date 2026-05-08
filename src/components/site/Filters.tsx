@@ -49,7 +49,7 @@ export const Filters = ({
 
       <div>
         <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">
-          Price (PKR)
+          Price (INR)
         </h4>
         <Slider
           value={price}

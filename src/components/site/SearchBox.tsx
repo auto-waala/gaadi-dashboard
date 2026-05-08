@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { listings, formatPKR } from "@/data/listings";
+import { listings, formatINR } from "@/data/listings";
 import { Link } from "react-router-dom";
 
 export const SearchBox = ({ compact = false }: { compact?: boolean }) => {
@@ -78,7 +78,7 @@ export const SearchBox = ({ compact = false }: { compact?: boolean }) => {
                       </div>
                     </div>
                     <div className="text-sm font-bold text-primary">
-                      {formatPKR(l.price)}
+                      {formatINR(l.price)}
                     </div>
                   </Link>
                 </li>

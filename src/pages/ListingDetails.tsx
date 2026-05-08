@@ -1,6 +1,6 @@
 import { Header } from "@/components/site/Header";
 import { useParams, Link, Navigate } from "react-router-dom";
-import { formatPKR, listings } from "@/data/listings";
+import { formatINR, listings } from "@/data/listings";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -104,9 +104,9 @@ const ListingDetails = () => {
               </div>
               <div className="text-right">
                 <div className="text-3xl font-extrabold text-primary">
-                  {formatPKR(listing.price)}
+                  {formatINR(listing.price)}
                 </div>
-                <div className="text-xs text-muted-foreground">EMI from PKR 32,500/mo</div>
+                <div className="text-xs text-muted-foreground">EMI from INR 32,500/mo</div>
               </div>
             </div>
 

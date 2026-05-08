@@ -283,4 +283,4 @@ export const listings: Listing[] = [
   },
 ];
 
-export const formatPKR = (n: number) => "₹ " + n.toLocaleString("en-IN");
+export const formatINR = (n: number) => "₹ " + n.toLocaleString("en-IN");
