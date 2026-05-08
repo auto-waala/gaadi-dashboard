@@ -1,5 +1,5 @@
 import { Header } from "@/components/site/Header";
-import { useParams, Link, Navigate } from "react-router-dom";
+import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
 import { formatPKR, listings } from "@/data/listings";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -19,11 +19,16 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { ListingCard } from "@/components/site/ListingCard";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "@/hooks/use-toast";
 
 const ListingDetails = () => {
   const { id } = useParams();
   const listing = listings.find((l) => l.id === id);
   const [active, setActive] = useState(0);
+  const [showPhone, setShowPhone] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   if (!listing) return <Navigate to="/" replace />;
 
@@ -166,10 +171,29 @@ const ListingDetails = () => {
               </div>
             </div>
             <div className="mt-4 space-y-2">
-              <Button variant="hero" className="w-full">
-                <Phone className="mr-2 h-4 w-4" /> Show phone number
+              <Button
+                variant="hero"
+                className="w-full"
+                onClick={() => {
+                  if (!user) {
+                    toast({ title: "Please login to view contact" });
+                    navigate("/auth");
+                    return;
+                  }
+                  setShowPhone(true);
+                }}
+              >
+                <Phone className="mr-2 h-4 w-4" />
+                {showPhone ? "+91 98xxx 4321" : "Show phone number"}
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button
+                variant="outline"
+                className="w-full"
+                onClick={() => {
+                  if (!user) return navigate("/auth");
+                  toast({ title: "Chat opened with seller" });
+                }}
+              >
                 <MessageCircle className="mr-2 h-4 w-4" /> Chat with seller
               </Button>
             </div>

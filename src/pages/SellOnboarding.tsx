@@ -15,6 +15,7 @@ import {
 import { Card } from "@/components/ui/card";
 import { Check, Camera, FileText, IndianRupee, ShieldCheck } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const steps = [
   { n: 1, label: "Category", icon: FileText },
@@ -24,6 +25,7 @@ const steps = [
 
 const SellOnboarding = () => {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
   const next = () => setStep((s) => Math.min(3, s + 1));
   const prev = () => setStep((s) => Math.max(1, s - 1));
@@ -31,9 +33,9 @@ const SellOnboarding = () => {
   const submit = () => {
     toast({
       title: "Listing submitted!",
-      description: "Our team will verify and publish your ad within 24 hours.",
+      description: "Redirecting to your seller dashboard…",
     });
-    setStep(1);
+    setTimeout(() => navigate("/dashboard"), 600);
   };
 
   return (
