@@ -9,6 +9,8 @@ import ListingDetails from "./pages/ListingDetails.tsx";
 import Auth from "./pages/Auth.tsx";
 import ResetPassword from "./pages/ResetPassword.tsx";
 import SellOnboarding from "./pages/SellOnboarding.tsx";
+import SellerDashboard from "./pages/SellerDashboard.tsx";
+import CategoryPage from "./pages/CategoryPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const App = () => (
             <Route path="/auth" element={<Auth />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/sell" element={<SellOnboarding />} />
+            <Route path="/dashboard" element={<SellerDashboard />} />
+            <Route path="/category/:slug" element={<CategoryPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
