@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { listings, formatPKR } from "@/data/listings";
+import { listings, formatINR } from "@/data/listings";
 import {
   Plus,
   Eye,
@@ -88,7 +88,7 @@ const SellerDashboard = () => {
             },
             {
               label: "Total Earnings",
-              value: formatPKR(stats.earnings),
+              value: formatINR(stats.earnings),
               icon: IndianRupee,
               color: "text-india-green",
             },
@@ -157,7 +157,7 @@ const SellerDashboard = () => {
                     </div>
                   </div>
                 </div>
-                <div className="font-bold text-primary">{formatPKR(l.price)}</div>
+                <div className="font-bold text-primary">{formatINR(l.price)}</div>
                 <div className="text-sm">{l.views}</div>
                 <div className="text-sm">{l.leads}</div>
                 <div>
