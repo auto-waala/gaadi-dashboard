@@ -113,11 +113,8 @@ export const Footer = () => {
       {/* Link columns */}
       <div className="container grid gap-8 py-10 md:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-1">
-          <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="AutoNext logo" width={40} height={40} className="h-10 w-10 rounded-lg" />
-            <span className="text-lg font-extrabold">
-              Auto<span className="text-primary">Next</span>
-            </span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="AutoNext logo" className="h-14 w-auto object-contain" />
           </Link>
           <p className="mt-3 text-xs text-muted-foreground">
             India's flexible classifieds marketplace. Buy. Sell. Trust.
