@@ -15,15 +15,15 @@ import { useState } from "react";
 import logo from "@/assets/logo-autonext.png";
 
 const categories = [
-  "All Categories",
-  "Cars",
-  "EVs",
-  "Bikes",
-  "Cycles",
-  "Trucks",
-  "Tractors",
-  "Buses",
-  "Spare Parts",
+  { label: "All Categories", slug: "" },
+  { label: "Cars", slug: "cars" },
+  { label: "EVs", slug: "ev" },
+  { label: "Bikes", slug: "bikes" },
+  { label: "Cycles", slug: "cycles" },
+  { label: "Trucks", slug: "trucks" },
+  { label: "Tractors", slug: "tractors" },
+  { label: "Buses", slug: "buses" },
+  { label: "Spare Parts", slug: "spare-parts" },
 ];
 
 export const Header = () => {
@@ -56,14 +56,14 @@ export const Header = () => {
                 Categories
               </span>
               {categories.map((c) => (
-                <a
-                  key={c}
-                  href="#"
+                <Link
+                  key={c.label}
+                  to={c.slug ? `/category/${c.slug}` : "/"}
                   onClick={() => setMobileOpen(false)}
                   className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
-                  {c}
-                </a>
+                  {c.label}
+                </Link>
               ))}
               <div className="my-3 border-t border-border" />
               <Link
@@ -129,15 +129,15 @@ export const Header = () => {
       <nav className="border-t border-border bg-secondary/40">
         <div className="container flex items-center gap-1 overflow-x-auto py-2 text-sm">
           {categories.map((c, i) => (
-            <a
-              key={c}
-              href="#"
+            <Link
+              key={c.label}
+              to={c.slug ? `/category/${c.slug}` : "/"}
               className={`whitespace-nowrap rounded-full px-3 py-1.5 font-medium transition-smooth hover:bg-accent hover:text-accent-foreground ${
                 i === 0 ? "bg-primary text-primary-foreground hover:bg-primary" : "text-foreground/80"
               }`}
             >
-              {c}
-            </a>
+              {c.label}
+            </Link>
           ))}
         </div>
       </nav>
