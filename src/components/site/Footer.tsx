@@ -123,10 +123,13 @@ export const Footer = () => {
             India's flexible classifieds marketplace. Buy. Sell. Trust.
           </p>
           <div className="mt-4 flex gap-2">
-            {[Facebook, Instagram, Twitter, Youtube, Linkedin].map((Icon, i) => (
+            {socials.map(({ Icon, label, href }) => (
               <a
-                key={i}
-                href="#"
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
                 className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-smooth hover:border-primary hover:text-primary"
               >
                 <Icon className="h-4 w-4" />
@@ -140,10 +143,10 @@ export const Footer = () => {
             <h4 className="mb-3 text-sm font-bold">{col.title}</h4>
             <ul className="space-y-2 text-sm">
               {col.links.map((l) => (
-                <li key={l}>
-                  <a href="#" className="text-muted-foreground hover:text-primary">
-                    {l}
-                  </a>
+                <li key={l.label}>
+                  <Link to={l.href} className="text-muted-foreground hover:text-primary">
+                    {l.label}
+                  </Link>
                 </li>
               ))}
             </ul>
