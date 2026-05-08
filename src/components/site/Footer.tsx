@@ -113,8 +113,11 @@ export const Footer = () => {
       {/* Link columns */}
       <div className="container grid gap-8 py-10 md:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-1">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="AutoNext logo" className="h-14 w-auto object-contain" />
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logo} alt="AutoNext logo" width={40} height={40} className="h-10 w-10 rounded-lg" />
+            <span className="text-lg font-extrabold">
+              Auto<span className="text-primary">Next</span>
+            </span>
           </Link>
           <p className="mt-3 text-xs text-muted-foreground">
             India's flexible classifieds marketplace. Buy. Sell. Trust.
@@ -180,7 +183,7 @@ export const Footer = () => {
       {/* Bottom */}
       <div className="border-t border-border">
         <div className="container flex flex-col items-center justify-between gap-3 py-5 text-xs text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} AutoNext Technologies Pvt. Ltd. — Made with ♥ in India</div>
+          <div>© {new Date().getFullYear()} Betalen Technologies Pvt. Ltd. — Made with ♥ in India</div>
           <div className="flex gap-4">
             <a href="#" className="hover:text-primary">Privacy</a>
             <a href="#" className="hover:text-primary">Terms</a>

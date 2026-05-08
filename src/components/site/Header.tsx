@@ -85,14 +85,23 @@ export const Header = () => {
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center gap-2.5">
           <img
             src={logo}
             alt="AutoNext logo — car, truck and bike in Indian flag colors"
-            className="h-14 w-auto object-contain"
+            width={44}
+            height={44}
+            className="h-11 w-11 rounded-xl bg-white object-contain shadow-elegant ring-1 ring-border"
           />
+          <div className="hidden flex-col leading-none sm:flex">
+            <span className="text-lg font-extrabold tracking-tight">
+              Auto<span className="text-primary">Next</span>
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+              Buy · Sell · <span className="text-india-green">Trust</span>
+            </span>
+          </div>
         </Link>
-
         <div className="hidden flex-1 items-center gap-2 md:flex">
           <LocationPicker />
           <SearchBox />
@@ -123,9 +132,8 @@ export const Header = () => {
             <Link
               key={c.label}
               to={c.slug ? `/category/${c.slug}` : "/"}
-              className={`whitespace-nowrap rounded-full px-3 py-1.5 font-medium transition-smooth hover:bg-accent hover:text-accent-foreground ${
-                i === 0 ? "bg-primary text-primary-foreground hover:bg-primary" : "text-foreground/80"
-              }`}
+              className={`whitespace-nowrap rounded-full px-3 py-1.5 font-medium transition-smooth hover:bg-accent hover:text-accent-foreground ${i === 0 ? "bg-primary text-primary-foreground hover:bg-primary" : "text-foreground/80"
+                }`}
             >
               {c.label}
             </Link>

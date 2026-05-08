@@ -109,9 +109,9 @@ const ListingDetails = () => {
               </div>
               <div className="text-right">
                 <div className="text-3xl font-extrabold text-primary">
-                  {formatPKR(listing.price)}
+                  {formatINR(listing.price)}
                 </div>
-                <div className="text-xs text-muted-foreground">EMI from PKR 32,500/mo</div>
+                <div className="text-xs text-muted-foreground">EMI from INR 32,500/mo</div>
               </div>
             </div>
 
