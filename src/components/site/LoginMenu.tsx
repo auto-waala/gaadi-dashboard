@@ -18,7 +18,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
-import { supabase } from "@/integrations/supabase/client";
 import { z } from "zod";
 
 type Mode = "login" | "register";
@@ -26,7 +25,7 @@ type Mode = "login" | "register";
 const emailSchema = z.string().trim().email("Enter a valid email").max(255);
 
 export const LoginMenu = () => {
-  const { user, signOut } = useAuth();
+  const { user, signOut, signIn, signUp } = useAuth();
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<Mode>("login");
@@ -42,7 +41,7 @@ export const LoginMenu = () => {
 
   if (user) {
     const initial =
-      (user.user_metadata?.first_name as string)?.[0]?.toUpperCase() ||
+      user.first_name?.[0]?.toUpperCase() ||
       user.email?.[0]?.toUpperCase() ||
       "U";
     return (
@@ -84,12 +83,9 @@ export const LoginMenu = () => {
     if (!ev.success) return toast({ title: ev.error.issues[0].message });
     if (!password) return toast({ title: "Enter your password" });
     setBusy(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: ev.data,
-      password,
-    });
+    const { error } = await signIn(ev.data, password);
     setBusy(false);
-    if (error) return toast({ title: "Login failed", description: error.message });
+    if (error) return toast({ title: "Login failed", description: error });
     toast({ title: "Welcome back!" });
     setOpen(false);
   };
@@ -101,16 +97,16 @@ export const LoginMenu = () => {
     if (!ev.success) return toast({ title: ev.error.issues[0].message });
     if (regPassword.length < 8) return toast({ title: "Password must be at least 8 characters" });
     setBusy(true);
-    const { error } = await supabase.auth.signUp({
+    const { error } = await signUp({
+      id: crypto.randomUUID(),
       email: ev.data,
       password: regPassword,
-      options: {
-        emailRedirectTo: `${window.location.origin}/`,
-        data: { first_name: firstName, last_name: lastName, phone },
-      },
+      first_name: firstName,
+      last_name: lastName,
+      phone,
     });
     setBusy(false);
-    if (error) return toast({ title: "Signup failed", description: error.message });
+    if (error) return toast({ title: "Signup failed", description: error });
     toast({ title: "Account created", description: "You're now signed in." });
     setOpen(false);
   };
