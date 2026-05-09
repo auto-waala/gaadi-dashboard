@@ -185,10 +185,10 @@ export const Footer = () => {
         <div className="container flex flex-col items-center justify-between gap-3 py-5 text-xs text-muted-foreground md:flex-row">
           <div>© {new Date().getFullYear()} Betalen Technologies Pvt. Ltd. — Made with ♥ in India</div>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-primary">Privacy</a>
-            <a href="#" className="hover:text-primary">Terms</a>
-            <a href="#" className="hover:text-primary">Cookies</a>
-            <a href="#" className="hover:text-primary">Contact</a>
+            <a href="/privacy" className="hover:text-primary">Privacy</a>
+            <a href="/terms" className="hover:text-primary">Terms</a>
+            <a href="/cookies" className="hover:text-primary">Cookies</a>
+            <a href="/contact" className="hover:text-primary">Contact</a>
           </div>
         </div>
       </div>

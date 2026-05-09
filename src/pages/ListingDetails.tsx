@@ -1,6 +1,6 @@
 import { Header } from "@/components/site/Header";
 import { useParams, Link, Navigate, useNavigate } from "react-router-dom";
-import { formatPKR, listings } from "@/data/listings";
+import { formatINR, listings } from "@/data/listings";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {

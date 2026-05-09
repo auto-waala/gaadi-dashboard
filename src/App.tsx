@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -12,6 +12,14 @@ import SellOnboarding from "./pages/SellOnboarding.tsx";
 import SellerDashboard from "./pages/SellerDashboard.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import PrivacyPolicy from "./pages/PrivacyPolicyComponent.tsx";
+import TermsOfService from "./pages/TermsConditions.tsx";
+import Contact from "./pages/ContactPage.tsx";
+import CookiesPolicy from "./pages/CookiePolicy.tsx";
+import Careers from "./pages/Careers.tsx";
+import AboutUs from "./pages/About.tsx";
+import Blog from "./pages/Blog.tsx";
+import Press from "./pages/Press.tsx";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +38,14 @@ const App = () => (
             <Route path="/sell" element={<SellOnboarding />} />
             <Route path="/dashboard" element={<SellerDashboard />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/cookies" element={<CookiesPolicy />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/press" element={<Press />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/blog" element={<Blog />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
