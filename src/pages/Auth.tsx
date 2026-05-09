@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { z } from "zod";
 
 const emailSchema = z.string().trim().email("Enter a valid email").max(255);
@@ -63,6 +62,7 @@ const Auth = () => {
 };
 
 const LoginForm = ({ onForgot }: { onForgot: () => void }) => {
+  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
@@ -73,12 +73,9 @@ const LoginForm = ({ onForgot }: { onForgot: () => void }) => {
     if (!ev.success) return toast({ title: ev.error.issues[0].message });
     if (!password) return toast({ title: "Enter your password" });
     setBusy(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: ev.data,
-      password,
-    });
+    const { error } = await signIn(ev.data, password);
     setBusy(false);
-    if (error) return toast({ title: "Login failed", description: error.message });
+    if (error) return toast({ title: "Login failed", description: error });
     toast({ title: "Welcome back!" });
   };
 
@@ -105,6 +102,7 @@ const LoginForm = ({ onForgot }: { onForgot: () => void }) => {
 };
 
 const RegisterForm = ({ onDone }: { onDone: () => void }) => {
+  const { signUp } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -120,16 +118,16 @@ const RegisterForm = ({ onDone }: { onDone: () => void }) => {
     const pv = passwordSchema.safeParse(password);
     if (!pv.success) return toast({ title: pv.error.issues[0].message });
     setBusy(true);
-    const { error } = await supabase.auth.signUp({
+    const { error } = await signUp({
+      id: crypto.randomUUID(),
       email: ev.data,
       password: pv.data,
-      options: {
-        emailRedirectTo: `${window.location.origin}/`,
-        data: { first_name: firstName, last_name: lastName, phone },
-      },
+      first_name: firstName,
+      last_name: lastName,
+      phone,
     });
     setBusy(false);
-    if (error) return toast({ title: "Signup failed", description: error.message });
+    if (error) return toast({ title: "Signup failed", description: error });
     toast({ title: "Account created", description: "You can now login." });
     onDone();
   };
@@ -166,6 +164,7 @@ const RegisterForm = ({ onDone }: { onDone: () => void }) => {
 };
 
 const ForgotForm = ({ onBack }: { onBack: () => void }) => {
+  const { resetPassword } = useAuth();
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
@@ -175,11 +174,9 @@ const ForgotForm = ({ onBack }: { onBack: () => void }) => {
     const ev = emailSchema.safeParse(email);
     if (!ev.success) return toast({ title: ev.error.issues[0].message });
     setBusy(true);
-    const { error } = await supabase.auth.resetPasswordForEmail(ev.data, {
-      redirectTo: `${window.location.origin}/reset-password`,
-    });
+    const { error } = await resetPassword(ev.data);
     setBusy(false);
-    if (error) return toast({ title: "Could not send", description: error.message });
+    if (error) return toast({ title: "Could not send", description: error });
     setSent(true);
     toast({ title: "Check your inbox", description: "We sent a reset link to " + ev.data });
   };

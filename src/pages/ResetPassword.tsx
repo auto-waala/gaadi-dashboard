@@ -2,9 +2,9 @@ import { Header } from "@/components/site/Header";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 
@@ -12,21 +12,10 @@ const passwordSchema = z.string().min(8, "Min 8 characters").max(72);
 
 const ResetPassword = () => {
   const navigate = useNavigate();
-  const [ready, setReady] = useState(false);
+  const { updatePassword } = useAuth();
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
-
-  useEffect(() => {
-    // Supabase parses the recovery hash and emits a PASSWORD_RECOVERY / SIGNED_IN event.
-    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "PASSWORD_RECOVERY" || event === "SIGNED_IN") setReady(true);
-    });
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (session) setReady(true);
-    });
-    return () => sub.subscription.unsubscribe();
-  }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,10 +23,10 @@ const ResetPassword = () => {
     if (!pv.success) return toast({ title: pv.error.issues[0].message });
     if (password !== confirm) return toast({ title: "Passwords do not match" });
     setBusy(true);
-    const { error } = await supabase.auth.updateUser({ password: pv.data });
+    const { error } = await updatePassword(pv.data);
     setBusy(false);
-    if (error) return toast({ title: "Could not update", description: error.message });
-    toast({ title: "Password updated", description: "You're now signed in." });
+    if (error) return toast({ title: "Could not update", description: error });
+    toast({ title: "Password updated" });
     navigate("/", { replace: true });
   };
 
@@ -50,25 +39,19 @@ const ResetPassword = () => {
           <p className="mt-1 text-sm text-muted-foreground">
             Enter your new password below.
           </p>
-          {!ready ? (
-            <p className="mt-6 text-sm text-muted-foreground">
-              Validating reset link...
-            </p>
-          ) : (
-            <form onSubmit={submit} className="mt-6 space-y-3">
-              <div className="space-y-1.5">
-                <Label htmlFor="np">New password</Label>
-                <Input id="np" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-              </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="cp">Confirm password</Label>
-                <Input id="cp" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
-              </div>
-              <Button type="submit" variant="hero" className="w-full" disabled={busy}>
-                {busy ? "Updating..." : "Update password"}
-              </Button>
-            </form>
-          )}
+          <form onSubmit={submit} className="mt-6 space-y-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="np">New password</Label>
+              <Input id="np" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="cp">Confirm password</Label>
+              <Input id="cp" type="password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+            </div>
+            <Button type="submit" variant="hero" className="w-full" disabled={busy}>
+              {busy ? "Updating..." : "Update password"}
+            </Button>
+          </form>
         </div>
       </main>
     </div>
