@@ -42,7 +42,7 @@ const SellerDashboard = () => {
   };
 
   const name =
-    (user.user_metadata?.first_name as string) || user.email?.split("@")[0] || "Seller";
+    user.first_name || user.email?.split("@")[0] || "Seller";
 
   return (
     <div className="min-h-screen bg-background">
