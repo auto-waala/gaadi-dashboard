@@ -357,4 +357,11 @@ const ListingDetails = () => {
   );
 };
 
+const Stat = ({ label, value }: { label: string; value: string }) => (
+  <div className="rounded-lg border border-border p-3">
+    <div className="text-xs text-muted-foreground">{label}</div>
+    <div className="text-base font-bold text-primary">{value}</div>
+  </div>
+);
+
 export default ListingDetails;
