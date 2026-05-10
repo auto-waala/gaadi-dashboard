@@ -14,12 +14,19 @@ import car3 from "@/assets/car-3.jpg";
 import car4 from "@/assets/car-4.jpg";
 import ev1 from "@/assets/ev-1.jpg";
 
+import thar from "@/assets/suv-thar.jpg";
+import bmw from "@/assets/suv-bmw-x5.jpg";
+import benz from "@/assets/suv-mercedes-gle.jpg";
+import vw from "@/assets/suv-vw-tiguan.jpg";
+import creta from "@/assets/suv-creta.jpg";
+
 const newCars = [
-  { id: "n1", title: "Tata Punch Creative AMT", price: "₹ 8,49,000", year: 2025, location: "Mumbai", image: car1 },
-  { id: "n2", title: "Hyundai Exter SX(O)", price: "₹ 9,15,000", year: 2025, location: "Pune", image: car2 },
-  { id: "n3", title: "Mahindra XUV 3XO AX7L", price: "₹ 13,99,000", year: 2025, location: "Delhi", image: car3 },
-  { id: "n4", title: "Maruti Brezza ZXi Plus", price: "₹ 12,40,000", year: 2025, location: "Bengaluru", image: car4 },
-  { id: "n5", title: "MG Windsor EV Essence", price: "₹ 15,50,000", year: 2025, location: "Hyderabad", image: ev1 },
+  { id: "1", title: "Tata Punch Creative AMT", price: "₹ 8,49,000", year: 2025, location: "Mumbai", image: car1 },
+  { id: "2", title: "Hyundai Creta SX(O) Turbo", price: "₹ 20,15,000", year: 2025, location: "Pune", image: creta },
+  { id: "3", title: "Mahindra Thar 4x4 LX", price: "₹ 17,60,000", year: 2025, location: "Delhi", image: thar },
+  { id: "ev1", title: "BMW X5 xDrive40i", price: "₹ 99,90,000", year: 2025, location: "Bengaluru", image: bmw },
+  { id: "ev2", title: "Mercedes-Benz GLE 450d", price: "₹ 1,07,50,000", year: 2025, location: "Hyderabad", image: benz },
+  { id: "b1", title: "Volkswagen Tiguan R-Line", price: "₹ 49,00,000", year: 2025, location: "Chennai", image: vw },
 ];
 
 export const NewArrivals = () => {
@@ -44,7 +51,7 @@ export const NewArrivals = () => {
           {newCars.map((c) => (
             <CarouselItem key={c.id} className="md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
               <Link
-                to="/"
+                to={`/listing/${c.id}`}
                 className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-smooth hover:-translate-y-1 hover:shadow-elegant"
               >
                 <div className="relative aspect-[4/3] overflow-hidden bg-secondary">

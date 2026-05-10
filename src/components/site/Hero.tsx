@@ -21,49 +21,55 @@ import car3 from "@/assets/car-3.jpg";
 import car4 from "@/assets/car-4.jpg";
 import ev1 from "@/assets/ev-1.jpg";
 
+import thar from "@/assets/suv-thar.jpg";
+import bmw from "@/assets/suv-bmw-x5.jpg";
+import benz from "@/assets/suv-mercedes-gle.jpg";
+import vw from "@/assets/suv-vw-tiguan.jpg";
+import creta from "@/assets/suv-creta.jpg";
+
 const suvSlides = [
   {
     id: "s1",
-    title: "Mahindra XUV700 AX7L",
-    price: "₹ 23,99,000",
-    tagline: "Adrenox Tech · AWD Diesel",
-    image: car3,
+    title: "Mahindra Thar 4x4 LX",
+    price: "₹ 17,60,000",
+    tagline: "Petrol · Hard Top · 4WD",
+    image: thar,
     location: "Delhi NCR",
     year: 2025,
   },
   {
     id: "s2",
-    title: "Tata Safari Accomplished+",
-    price: "₹ 21,45,000",
-    tagline: "7-Seater · Panoramic Sunroof",
-    image: car1,
+    title: "BMW X5 xDrive40i M Sport",
+    price: "₹ 99,90,000",
+    tagline: "Petrol · 8-Speed Auto",
+    image: bmw,
     location: "Mumbai",
     year: 2025,
   },
   {
     id: "s3",
-    title: "Hyundai Creta N-Line",
-    price: "₹ 18,90,000",
-    tagline: "Turbo Petrol · DCT",
-    image: car2,
+    title: "Mercedes-Benz GLE 450d",
+    price: "₹ 1,07,50,000",
+    tagline: "Diesel · 4MATIC",
+    image: benz,
     location: "Bengaluru",
     year: 2025,
   },
   {
     id: "s4",
-    title: "MG Windsor EV Essence",
-    price: "₹ 15,50,000",
-    tagline: "525 km Range · Battery Lease",
-    image: ev1,
+    title: "Volkswagen Tiguan R-Line",
+    price: "₹ 49,00,000",
+    tagline: "Turbo Petrol · DSG",
+    image: vw,
     location: "Hyderabad",
     year: 2025,
   },
   {
     id: "s5",
-    title: "Maruti Grand Vitara Alpha+",
-    price: "₹ 17,99,000",
-    tagline: "Strong Hybrid · AWD",
-    image: car4,
+    title: "Hyundai Creta SX(O) Turbo",
+    price: "₹ 20,15,000",
+    tagline: "Petrol · DCT · Panoramic Roof",
+    image: creta,
     location: "Pune",
     year: 2025,
   },
@@ -95,7 +101,7 @@ export const Hero = () => {
   }, [scrollNext]);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-hidden bg-gradient-to-br from-accent/40 via-background to-secondary">
       {/* Full-width background carousel */}
       <div className="absolute inset-0">
         <Carousel
@@ -110,9 +116,10 @@ export const Hero = () => {
                   <img
                     src={slide.image}
                     alt={slide.title}
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-cover object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/20" />
+                  {/* Soft left fade only — keep vehicle fully visible on the right */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-background via-background/60 to-transparent" />
                 </div>
               </CarouselItem>
             ))}

@@ -21,6 +21,15 @@ import { useState } from "react";
 import { ListingCard } from "@/components/site/ListingCard";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "@/hooks/use-toast";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -129,30 +138,148 @@ const ListingDetails = () => {
             </div>
           </div>
 
-          {/* Description */}
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-card">
-            <h2 className="text-lg font-bold">Description</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Single owner, well maintained {listing.title}. All documents
-              clear, original paint, non-accidental. Comes with full service
-              history and tools. Serious buyers only — exchange possible with
-              cash difference. Test drive available in {listing.location}.
-            </p>
+          {/* Tabbed details */}
+          <div className="rounded-2xl border border-border bg-card p-3 shadow-card md:p-5">
+            <Tabs defaultValue="price" className="w-full">
+              <TabsList className="flex w-full flex-wrap justify-start gap-1 bg-transparent p-0">
+                {[
+                  { v: "price", l: "Price" },
+                  { v: "compare", l: "Compare Offers" },
+                  { v: "images", l: "Images" },
+                  { v: "specs", l: "Specs" },
+                  { v: "reviews", l: "User Reviews" },
+                  { v: "view360", l: "360° View" },
+                  { v: "variants", l: "Variants" },
+                  { v: "more", l: "More" },
+                ].map((t) => (
+                  <TabsTrigger
+                    key={t.v}
+                    value={t.v}
+                    className="rounded-full border border-border data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    {t.l}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
 
-            <div className="mt-5 grid gap-2 sm:grid-cols-2">
-              {[
-                "Power steering",
-                "Power windows",
-                "Air conditioning",
-                "Alloy wheels",
-                "ABS brakes",
-                "Bluetooth audio",
-              ].map((f) => (
-                <div key={f} className="flex items-center gap-2 text-sm">
-                  <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {f}
+              <TabsContent value="price" className="mt-5">
+                <div className="grid gap-3 sm:grid-cols-3">
+                  <Stat label="On-road price" value={formatINR(listing.price + 80000)} />
+                  <Stat label="Ex-showroom" value={formatINR(listing.price)} />
+                  <Stat label="EMI from" value="₹ 32,500/mo" />
                 </div>
-              ))}
-            </div>
+                <p className="mt-3 text-xs text-muted-foreground">
+                  Final price subject to RTO, insurance and dealer offers in {listing.location}.
+                </p>
+              </TabsContent>
+
+              <TabsContent value="compare" className="mt-5 space-y-2 text-sm">
+                {[
+                  { dealer: "AutoNext Verified Seller", offer: "₹ 25,000 cash discount + free 1st service" },
+                  { dealer: "City Motors", offer: "Exchange bonus up to ₹ 40,000" },
+                  { dealer: "Prime Cars", offer: "Zero down payment EMI plan" },
+                ].map((o) => (
+                  <div key={o.dealer} className="flex items-center justify-between rounded-lg border border-border p-3">
+                    <span className="font-medium">{o.dealer}</span>
+                    <span className="text-muted-foreground">{o.offer}</span>
+                  </div>
+                ))}
+              </TabsContent>
+
+              <TabsContent value="images" className="mt-5">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                  {gallery.map((g, i) => (
+                    <img key={i} src={g} alt="" className="aspect-[4/3] w-full rounded-lg object-cover" />
+                  ))}
+                </div>
+              </TabsContent>
+
+              <TabsContent value="specs" className="mt-5">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Specification</TableHead>
+                      <TableHead>Detail</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {[
+                      ["Year", String(listing.year)],
+                      ["KM Driven", listing.km.toLocaleString() + " km"],
+                      ["Fuel", listing.fuel],
+                      ["Transmission", listing.transmission],
+                      ["Available Colors", "White, Red, Silver, Black, Blue"],
+                      ["Seating Capacity", "5"],
+                      ["Mileage", "18.6 km/l"],
+                      ["Engine", "1497 cc"],
+                      ["Budget Range", `${formatINR(listing.price - 50000)} – ${formatINR(listing.price + 80000)}`],
+                      ["Location", listing.location],
+                    ].map(([k, v]) => (
+                      <TableRow key={k}>
+                        <TableCell className="font-medium">{k}</TableCell>
+                        <TableCell>{v}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TabsContent>
+
+              <TabsContent value="reviews" className="mt-5 space-y-3 text-sm">
+                {[
+                  { name: "Rahul S.", rating: 5, text: "Excellent condition, smooth drive, well maintained." },
+                  { name: "Priya M.", rating: 4, text: "Good value for money. Service history was provided." },
+                ].map((r) => (
+                  <div key={r.name} className="rounded-lg border border-border p-3">
+                    <div className="flex items-center gap-2 font-semibold">
+                      {r.name}
+                      <span className="flex">
+                        {Array.from({ length: r.rating }).map((_, i) => (
+                          <Star key={i} className="h-3 w-3 fill-primary text-primary" />
+                        ))}
+                      </span>
+                    </div>
+                    <p className="mt-1 text-muted-foreground">{r.text}</p>
+                  </div>
+                ))}
+              </TabsContent>
+
+              <TabsContent value="view360" className="mt-5">
+                <div className="flex aspect-[16/9] w-full items-center justify-center rounded-lg bg-muted text-sm text-muted-foreground">
+                  360° interactive view coming soon
+                </div>
+              </TabsContent>
+
+              <TabsContent value="variants" className="mt-5 space-y-2 text-sm">
+                {["Base", "Mid", "Top", "Top + Sunroof"].map((v, i) => (
+                  <div key={v} className="flex items-center justify-between rounded-lg border border-border p-3">
+                    <span className="font-medium">{v}</span>
+                    <span className="text-primary font-semibold">{formatINR(listing.price + i * 70000)}</span>
+                  </div>
+                ))}
+              </TabsContent>
+
+              <TabsContent value="more" className="mt-5">
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  Single owner, well maintained {listing.title}. All documents clear,
+                  original paint, non-accidental. Comes with full service history and tools.
+                  Test drive available in {listing.location}.
+                </p>
+                <div className="mt-4 grid gap-2 sm:grid-cols-2 text-sm">
+                  {[
+                    "Power steering",
+                    "Power windows",
+                    "Air conditioning",
+                    "Alloy wheels",
+                    "ABS brakes",
+                    "Bluetooth audio",
+                  ].map((f) => (
+                    <div key={f} className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary" /> {f}
+                    </div>
+                  ))}
+                </div>
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
 
@@ -229,5 +356,12 @@ const ListingDetails = () => {
     </div>
   );
 };
+
+const Stat = ({ label, value }: { label: string; value: string }) => (
+  <div className="rounded-lg border border-border p-3">
+    <div className="text-xs text-muted-foreground">{label}</div>
+    <div className="text-base font-bold text-primary">{value}</div>
+  </div>
+);
 
 export default ListingDetails;
