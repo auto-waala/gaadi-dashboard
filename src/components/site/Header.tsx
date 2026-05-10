@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Heart, Menu, Plus } from "lucide-react";
+import { Car, Heart, Menu, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/logo-autonext.png";
@@ -85,13 +85,16 @@ export const Header = () => {
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center" aria-label="AutoNext home">
+        <Link to="/" className="flex items-center gap-2" aria-label="AutoNext home">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-card">
+            <Car className="h-6 w-6" />
+          </span>
           <img
             src={logo}
             alt="AutoNext — Buy. Sell. Trust."
-            width={180}
-            height={48}
-            className="h-12 w-auto object-contain"
+            width={220}
+            height={64}
+            className="h-14 w-auto object-contain md:h-16"
           />
         </Link>
         <div className="hidden flex-1 items-center gap-2 md:flex">
