@@ -85,22 +85,14 @@ export const Header = () => {
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center" aria-label="AutoNext home">
           <img
             src={logo}
-            alt="AutoNext logo — car, truck and bike in Indian flag colors"
-            width={44}
-            height={44}
-            className="h-11 w-11 rounded-xl bg-white object-contain shadow-elegant ring-1 ring-border"
+            alt="AutoNext — Buy. Sell. Trust."
+            width={180}
+            height={48}
+            className="h-12 w-auto object-contain"
           />
-          <div className="hidden flex-col leading-none sm:flex">
-            <span className="text-lg font-extrabold tracking-tight">
-              Auto<span className="text-primary">Next</span>
-            </span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
-              Buy · Sell · <span className="text-india-green">Trust</span>
-            </span>
-          </div>
         </Link>
         <div className="hidden flex-1 items-center gap-2 md:flex">
           <LocationPicker />
