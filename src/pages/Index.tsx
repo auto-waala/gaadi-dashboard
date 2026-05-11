@@ -45,6 +45,7 @@ const Index = () => {
         <Hero />
         <TrendingCars />
         <NewArrivals />
+        <VehicleVideos />
         <CategoryGrid active={type} onChange={setType} />
         <BrandCategories />
 
