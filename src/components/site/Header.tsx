@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Car, Heart, Menu, Plus } from "lucide-react";
+import { Bike, Car, Heart, Menu, Plus, Truck } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/logo-autonext.png";
