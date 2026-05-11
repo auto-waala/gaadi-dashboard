@@ -20,6 +20,7 @@ import Careers from "./pages/Careers.tsx";
 import AboutUs from "./pages/About.tsx";
 import Blog from "./pages/Blog.tsx";
 import Press from "./pages/Press.tsx";
+import { EnquiryPopup } from "./components/site/EnquiryPopup";
 
 const queryClient = new QueryClient();
 
