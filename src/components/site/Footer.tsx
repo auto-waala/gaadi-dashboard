@@ -193,6 +193,7 @@ export const Footer = () => {
           </div>
         </div>
       </div>
+      <div className="h-1 bg-tricolor" />
     </footer>
   );
 };
