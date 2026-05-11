@@ -75,7 +75,8 @@ const cities = [
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-border bg-secondary/40">
+    <footer className="border-t border-border bg-gradient-to-b from-secondary/40 via-primary/5 to-primary/10">
+      <div className="h-1 bg-tricolor" />
       {/* Trust strip */}
       <div className="border-b border-border bg-background">
         <div className="container grid gap-6 py-8 md:grid-cols-4">
