@@ -9,10 +9,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Bike, Car, Heart, Menu, Plus, Truck } from "lucide-react";
+import { Heart, Menu, Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "@/assets/logo-autonext.png";
+import brandIcon from "@/assets/icon-autonext.png";
 
 const categories = [
   { label: "All Categories", slug: "" },
