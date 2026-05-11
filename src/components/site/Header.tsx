@@ -87,15 +87,13 @@ export const Header = () => {
         </Sheet>
 
         <Link to="/" className="flex items-center gap-2" aria-label="AutoNext home">
-          <span className="flex h-11 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary-glow text-primary-foreground shadow-card">
-            <span className="flex flex-col items-center leading-none">
-              <Truck className="h-3.5 w-3.5 -mb-0.5" />
-              <span className="flex items-center gap-0.5">
-                <Car className="h-3.5 w-3.5" />
-                <Bike className="h-3 w-3" />
-              </span>
-            </span>
-          </span>
+          <img
+            src={brandIcon}
+            alt="AutoNext icon"
+            width={48}
+            height={48}
+            className="h-11 w-11 object-contain"
+          />
           <img
             src={logo}
             alt="AutoNext — Buy. Sell. Trust."
