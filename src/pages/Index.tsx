@@ -2,6 +2,7 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { NewArrivals } from "@/components/site/NewArrivals";
 import { TrendingCars } from "@/components/site/TrendingCars";
+import { VehicleVideos } from "@/components/site/VehicleVideos";
 import { BrandCategories } from "@/components/site/BrandCategories";
 import { Footer } from "@/components/site/Footer";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
