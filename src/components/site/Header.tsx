@@ -86,7 +86,7 @@ export const Header = () => {
           </SheetContent>
         </Sheet>
 
-        <Link to="/" className="flex items-center gap-2" aria-label="AutoNext home">
+        <Link to="/" className="flex items-center gap-0.5" aria-label="AutoNext home">
           <img
             src={brandIcon}
             alt="AutoNext icon"
