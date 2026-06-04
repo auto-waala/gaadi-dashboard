@@ -1,9 +1,10 @@
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
-import { NewArrivals } from "@/components/site/NewArrivals";
+import { CarSection } from "@/components/site/CarSection";
 import { TrendingCars } from "@/components/site/TrendingCars";
 import { VehicleVideos } from "@/components/site/VehicleVideos";
 import { BrandCategories } from "@/components/site/BrandCategories";
+import { BankPartners } from "@/components/site/BankPartners";
 import { Footer } from "@/components/site/Footer";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
 import { ListingCard } from "@/components/site/ListingCard";
@@ -44,10 +45,14 @@ const Index = () => {
       <main>
         <Hero />
         <TrendingCars />
-        <NewArrivals />
+        <CarSection section="newlyarrived" />
+        <CarSection section="premium" />
+        <CarSection section="upcoming" />
         <VehicleVideos />
         <CategoryGrid active={type} onChange={setType} />
         <BrandCategories />
+        <BankPartners />
+
 
         <section id="listings" className="container pb-16">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
