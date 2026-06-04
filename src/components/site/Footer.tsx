@@ -67,10 +67,19 @@ const socials = [
   { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/company/autonext" },
 ];
 
-const cities = [
-  "Mumbai", "Delhi", "Bengaluru", "Hyderabad", "Chennai", "Kolkata",
-  "Pune", "Ahmedabad", "Jaipur", "Lucknow", "Surat", "Chandigarh",
-  "Nagpur", "Indore", "Bhopal", "Kochi", "Coimbatore", "Patna",
+const cities: { name: string; icon: string; landmark: string }[] = [
+  { name: "Mumbai", icon: "🌉", landmark: "Gateway of India" },
+  { name: "Delhi", icon: "🏛️", landmark: "India Gate" },
+  { name: "Bengaluru", icon: "🌳", landmark: "Garden City" },
+  { name: "Hyderabad", icon: "🕌", landmark: "Charminar" },
+  { name: "Chennai", icon: "🏖️", landmark: "Marina Beach" },
+  { name: "Kolkata", icon: "🌉", landmark: "Howrah Bridge" },
+  { name: "Pune", icon: "🏰", landmark: "Shaniwar Wada" },
+  { name: "Ahmedabad", icon: "🛕", landmark: "Sabarmati" },
+  { name: "Jaipur", icon: "🏯", landmark: "Hawa Mahal" },
+  { name: "Lucknow", icon: "🕌", landmark: "Bara Imambara" },
+  { name: "Chandigarh", icon: "🌹", landmark: "Rock Garden" },
+  { name: "Kochi", icon: "🛶", landmark: "Backwaters" },
 ];
 
 export const Footer = () => {
@@ -97,19 +106,35 @@ export const Footer = () => {
       {/* Cities */}
       <div className="border-b border-border">
         <div className="container py-8">
-          <h3 className="mb-3 text-sm font-bold uppercase tracking-wider text-muted-foreground">
+          <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-muted-foreground">
             Browse by city
           </h3>
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+          <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-12">
             {cities.map((c) => (
-              <a key={c} href="#" className="text-foreground/80 hover:text-primary">
-                {c}
+              <a
+                key={c.name}
+                href={`/category/cars?city=${encodeURIComponent(c.name)}`}
+                title={c.landmark}
+                className="group flex flex-col items-center gap-1 rounded-xl border border-border bg-card p-3 text-center transition-smooth hover:-translate-y-0.5 hover:border-primary hover:shadow-card"
+              >
+                <span className="text-2xl">{c.icon}</span>
+                <span className="text-xs font-semibold text-foreground/80 group-hover:text-primary">
+                  {c.name}
+                </span>
+                <span className="text-[10px] leading-tight text-muted-foreground">
+                  {c.landmark}
+                </span>
               </a>
             ))}
-            <a href="#" className="font-semibold text-primary">View all cities →</a>
+          </div>
+          <div className="mt-3 text-right">
+            <a href="#" className="text-sm font-semibold text-primary hover:underline">
+              View all cities →
+            </a>
           </div>
         </div>
       </div>
+
 
       {/* Link columns */}
       <div className="container grid gap-8 py-10 md:grid-cols-2 lg:grid-cols-6">

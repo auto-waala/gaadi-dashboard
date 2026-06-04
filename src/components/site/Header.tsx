@@ -1,6 +1,7 @@
 import { LoginMenu } from "@/components/site/LoginMenu";
 import { SearchBox } from "@/components/site/SearchBox";
 import { LocationPicker } from "@/components/site/LocationPicker";
+import { EnableNotificationsButton } from "@/components/site/EnableNotificationsButton";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -108,6 +109,7 @@ export const Header = () => {
         </div>
 
         <div className="ml-auto flex items-center gap-1 md:gap-2">
+          <EnableNotificationsButton />
           <Button variant="ghost" size="icon" aria-label="Favorites">
             <Heart className="h-5 w-5" />
           </Button>

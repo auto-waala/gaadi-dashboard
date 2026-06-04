@@ -11,6 +11,8 @@ import ResetPassword from "./pages/ResetPassword.tsx";
 import SellOnboarding from "./pages/SellOnboarding.tsx";
 import SellerDashboard from "./pages/SellerDashboard.tsx";
 import CategoryPage from "./pages/CategoryPage.tsx";
+import SectionListing from "./pages/SectionListing.tsx";
+import SectionDetails from "./pages/SectionDetails.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import PrivacyPolicy from "./pages/PrivacyPolicyComponent.tsx";
 import TermsOfService from "./pages/TermsConditions.tsx";
@@ -39,6 +41,8 @@ const App = () => (
             <Route path="/sell" element={<SellOnboarding />} />
             <Route path="/dashboard" element={<SellerDashboard />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
+            <Route path="/:section/cars" element={<SectionListing />} />
+            <Route path="/:section/cars/:id" element={<SectionDetails />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookiesPolicy />} />
