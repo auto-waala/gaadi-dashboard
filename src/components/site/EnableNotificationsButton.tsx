@@ -30,7 +30,7 @@ export const EnableNotificationsButton = () => {
       return;
     }
     const res = await enablePushNotifications();
-    if (res.ok) {
+    if (res.ok === true) {
       setStatus("granted");
       toast({
         title: "Notifications enabled",
