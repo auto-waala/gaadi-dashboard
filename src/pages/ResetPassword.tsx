@@ -13,6 +13,7 @@ const passwordSchema = z.string().min(8, "Min 8 characters").max(72);
 const ResetPassword = () => {
   const navigate = useNavigate();
   const { updatePassword } = useAuth();
+  const [currentPassword, setCurrentPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
@@ -23,7 +24,7 @@ const ResetPassword = () => {
     if (!pv.success) return toast({ title: pv.error.issues[0].message });
     if (password !== confirm) return toast({ title: "Passwords do not match" });
     setBusy(true);
-    const { error } = await updatePassword(pv.data);
+    const { error } = await updatePassword(currentPassword, pv.data);
     setBusy(false);
     if (error) return toast({ title: "Could not update", description: error });
     toast({ title: "Password updated" });
@@ -40,6 +41,10 @@ const ResetPassword = () => {
             Enter your new password below.
           </p>
           <form onSubmit={submit} className="mt-6 space-y-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="op">Current password</Label>
+              <Input id="op" type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+            </div>
             <div className="space-y-1.5">
               <Label htmlFor="np">New password</Label>
               <Input id="np" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
