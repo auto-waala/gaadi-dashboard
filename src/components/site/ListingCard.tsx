@@ -2,6 +2,7 @@ import { Heart, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { formatINR, type Listing } from "@/data/listings";
 import { Badge } from "@/components/ui/badge";
+import { CertifiedStamp } from "./CertifiedStamp";
 
 export const ListingCard = ({ listing }: { listing: Listing }) => {
   return (
@@ -21,9 +22,10 @@ export const ListingCard = ({ listing }: { listing: Listing }) => {
             Featured
           </Badge>
         )}
+        <CertifiedStamp className="absolute right-3 top-3" />
         <button
           onClick={(e) => e.preventDefault()}
-          className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-background/90 text-foreground/80 backdrop-blur transition-smooth hover:bg-primary hover:text-primary-foreground"
+          className="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-background/90 text-foreground/80 backdrop-blur transition-smooth hover:bg-primary hover:text-primary-foreground"
           aria-label="Save"
         >
           <Heart className="h-4 w-4" />
