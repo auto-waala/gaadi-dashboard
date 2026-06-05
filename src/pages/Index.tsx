@@ -54,6 +54,9 @@ const Index = () => {
         <CategoryGrid active={type} onChange={setType} />
         <BrandCategories />
         <BankPartners />
+        <InsurancePartners />
+        <VehicleChecks />
+
 
 
         <section id="listings" className="container pb-16">
