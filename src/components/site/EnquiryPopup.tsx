@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
+import { MessageSquarePlus } from "lucide-react";
 
 const STORAGE_KEY = "autonext_enquiry_shown";
 const DELAY_MS = 10 * 60 * 1000; // 10 minutes
