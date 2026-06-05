@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sparkles, MapPin, Star, Fuel, Cog } from "lucide-react";
 import { Link } from "react-router-dom";
 import { sectionCars, sectionMeta, type SectionKey } from "@/data/sections";
+import { CertifiedStamp } from "./CertifiedStamp";
 
 export const CarSection = ({ section }: { section: SectionKey }) => {
   const meta = sectionMeta[section];
