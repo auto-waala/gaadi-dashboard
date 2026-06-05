@@ -29,11 +29,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { findSectionCar, sectionMeta, type SectionKey } from "@/data/sections";
+import {
+  findSectionCar,
+  sectionCars,
+  sectionMeta,
+  type SectionKey,
+} from "@/data/sections";
 import {
   findVehicleDetails,
   type VehicleDetails,
 } from "@/data/vehicleDetails";
+import { CertifiedStamp } from "@/components/site/CertifiedStamp";
 
 const VALID: SectionKey[] = ["newlyarrived", "premium", "upcoming"];
 
