@@ -59,6 +59,7 @@ export const CarSection = ({ section }: { section: SectionKey }) => {
                   <Badge className={`absolute left-3 top-3 ${meta.badgeClass} text-white hover:${meta.badgeClass}`}>
                     {c.badge ?? meta.tag}
                   </Badge>
+                  <CertifiedStamp className="absolute right-3 top-3" />
                 </div>
                 <div className="flex flex-col gap-1 p-4">
                   <span className="text-lg font-bold text-primary">{c.price}</span>
