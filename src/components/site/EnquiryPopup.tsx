@@ -182,5 +182,6 @@ export const EnquiryPopup = () => {
         </form>
       </DialogContent>
     </Dialog>
+    </>
   );
 };
