@@ -50,7 +50,6 @@ const Index = () => {
         <CarSection section="newlyarrived" />
         <CarSection section="premium" />
         <CarSection section="upcoming" />
-        <VehicleVideos />
         <section id="listings" className="container pb-16">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -124,7 +123,7 @@ const Index = () => {
         <BankPartners />
         <InsurancePartners />
         <VehicleChecks />
-
+        <VehicleVideos />
       </main>
 
       <Footer />
