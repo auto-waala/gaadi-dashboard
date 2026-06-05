@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { Sparkles, MapPin, Star, Fuel, Cog } from "lucide-react";
 import { Link } from "react-router-dom";
 import { sectionCars, sectionMeta, type SectionKey } from "@/data/sections";
+import { CertifiedStamp } from "./CertifiedStamp";
 
 export const CarSection = ({ section }: { section: SectionKey }) => {
   const meta = sectionMeta[section];
@@ -58,6 +59,7 @@ export const CarSection = ({ section }: { section: SectionKey }) => {
                   <Badge className={`absolute left-3 top-3 ${meta.badgeClass} text-white hover:${meta.badgeClass}`}>
                     {c.badge ?? meta.tag}
                   </Badge>
+                  <CertifiedStamp className="absolute right-3 top-3" />
                 </div>
                 <div className="flex flex-col gap-1 p-4">
                   <span className="text-lg font-bold text-primary">{c.price}</span>

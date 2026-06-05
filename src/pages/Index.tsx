@@ -5,6 +5,8 @@ import { TrendingCars } from "@/components/site/TrendingCars";
 import { VehicleVideos } from "@/components/site/VehicleVideos";
 import { BrandCategories } from "@/components/site/BrandCategories";
 import { BankPartners } from "@/components/site/BankPartners";
+import { InsurancePartners } from "@/components/site/InsurancePartners";
+import { VehicleChecks } from "@/components/site/VehicleChecks";
 import { Footer } from "@/components/site/Footer";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
 import { ListingCard } from "@/components/site/ListingCard";
@@ -52,6 +54,9 @@ const Index = () => {
         <CategoryGrid active={type} onChange={setType} />
         <BrandCategories />
         <BankPartners />
+        <InsurancePartners />
+        <VehicleChecks />
+
 
 
         <section id="listings" className="container pb-16">

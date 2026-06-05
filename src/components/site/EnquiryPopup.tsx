@@ -19,6 +19,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
+import { MessageSquarePlus } from "lucide-react";
 
 const STORAGE_KEY = "autonext_enquiry_shown";
 const DELAY_MS = 10 * 60 * 1000; // 10 minutes
@@ -91,8 +92,19 @@ export const EnquiryPopup = () => {
   };
 
   return (
-    <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
+    <>
+      {/* Floating "Enquire now" button — visible on every page */}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground shadow-elegant transition-smooth hover:scale-105 hover:bg-primary/90 md:bottom-6 md:right-6"
+        aria-label="Open enquiry form"
+      >
+        <MessageSquarePlus className="h-4 w-4" /> Enquire
+      </button>
+
+      <Dialog open={open} onOpenChange={handleOpenChange}>
+        <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Looking for the perfect ride?</DialogTitle>
           <DialogDescription>
@@ -170,5 +182,6 @@ export const EnquiryPopup = () => {
         </form>
       </DialogContent>
     </Dialog>
+    </>
   );
 };

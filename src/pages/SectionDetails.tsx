@@ -29,11 +29,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { findSectionCar, sectionMeta, type SectionKey } from "@/data/sections";
+import {
+  findSectionCar,
+  sectionCars,
+  sectionMeta,
+  type SectionKey,
+} from "@/data/sections";
 import {
   findVehicleDetails,
   type VehicleDetails,
 } from "@/data/vehicleDetails";
+import { CertifiedStamp } from "@/components/site/CertifiedStamp";
 
 const VALID: SectionKey[] = ["newlyarrived", "premium", "upcoming"];
 
@@ -569,6 +575,85 @@ const SectionDetails = () => {
             </TabsContent>
           </Tabs>
         </div>
+
+        {/* Related cars from the same section */}
+        <section className="mt-12">
+          <div className="mb-5 flex items-end justify-between gap-3">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight">
+                More {meta.title.toLowerCase()}
+              </h2>
+              <p className="text-sm text-muted-foreground">
+                You might also like these {meta.tag.toLowerCase()} picks.
+              </p>
+            </div>
+            <Link
+              to={`/${key}/cars`}
+              className="hidden text-sm font-semibold text-primary hover:underline md:inline"
+            >
+              View all →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {sectionCars[key]
+              .filter((c) => c.id !== car.id)
+              .slice(0, 4)
+              .map((c) => (
+                <Link
+                  key={c.id}
+                  to={`/${key}/cars/${c.id}`}
+                  className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-card transition-smooth hover:-translate-y-1 hover:shadow-elegant"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-secondary">
+                    <img
+                      src={c.image}
+                      alt={c.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-smooth group-hover:scale-105"
+                    />
+                    <Badge
+                      className={`absolute left-3 top-3 ${meta.badgeClass} text-white`}
+                    >
+                      {c.badge ?? meta.tag}
+                    </Badge>
+                    <CertifiedStamp className="absolute right-3 top-3" />
+                  </div>
+                  <div className="flex flex-col gap-1 p-4">
+                    <span className="text-lg font-bold text-primary">
+                      {c.price}
+                    </span>
+                    <h3 className="line-clamp-1 text-sm font-semibold">
+                      {c.title}
+                    </h3>
+                    <div className="mt-1 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                      {c.fuel && (
+                        <span className="inline-flex items-center gap-1">
+                          <Fuel className="h-3 w-3" /> {c.fuel}
+                        </span>
+                      )}
+                      {c.transmission && (
+                        <span className="inline-flex items-center gap-1">
+                          <Cog className="h-3 w-3" /> {c.transmission}
+                        </span>
+                      )}
+                      {c.rating && (
+                        <span className="inline-flex items-center gap-1">
+                          <Star className="h-3 w-3 fill-amber-400 text-amber-400" />{" "}
+                          {c.rating}
+                        </span>
+                      )}
+                    </div>
+                    <div className="mt-2 flex items-center justify-between border-t border-border pt-2 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <MapPin className="h-3 w-3" /> {c.location}
+                      </span>
+                      <span>{c.year}</span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+          </div>
+        </section>
       </main>
       <Footer />
     </div>
