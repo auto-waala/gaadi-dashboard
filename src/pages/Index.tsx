@@ -51,14 +51,6 @@ const Index = () => {
         <CarSection section="premium" />
         <CarSection section="upcoming" />
         <VehicleVideos />
-        <CategoryGrid active={type} onChange={setType} />
-        <BrandCategories />
-        <BankPartners />
-        <InsurancePartners />
-        <VehicleChecks />
-
-
-
         <section id="listings" className="container pb-16">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -127,6 +119,12 @@ const Index = () => {
             </div>
           </div>
         </section>
+        <CategoryGrid active={type} onChange={setType} />
+        <BrandCategories />
+        <BankPartners />
+        <InsurancePartners />
+        <VehicleChecks />
+
       </main>
 
       <Footer />
