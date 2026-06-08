@@ -23,6 +23,7 @@ import AboutUs from "./pages/About.tsx";
 import Blog from "./pages/Blog.tsx";
 import Press from "./pages/Press.tsx";
 import { EnquiryPopup } from "./components/site/EnquiryPopup";
+import { GeolocationPrompt } from "./components/site/GeolocationPrompt";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
           <EnquiryPopup />
+          <GeolocationPrompt />
         </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>

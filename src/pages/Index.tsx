@@ -6,6 +6,7 @@ import { VehicleVideos } from "@/components/site/VehicleVideos";
 import { BrandCategories } from "@/components/site/BrandCategories";
 import { BankPartners } from "@/components/site/BankPartners";
 import { InsurancePartners } from "@/components/site/InsurancePartners";
+import { DealerPartners } from "@/components/site/DealerPartners";
 import { VehicleChecks } from "@/components/site/VehicleChecks";
 import { Footer } from "@/components/site/Footer";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
@@ -122,6 +123,7 @@ const Index = () => {
         <BrandCategories />
         <BankPartners />
         <InsurancePartners />
+        <DealerPartners />
         <VehicleChecks />
         <VehicleVideos />
       </main>
