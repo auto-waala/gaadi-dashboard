@@ -14,7 +14,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Search, ChevronLeft, ChevronRight } from "lucide-react";
+import { Search, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import car1 from "@/assets/car-1.jpg";
 import car2 from "@/assets/car-2.jpg";
 import car3 from "@/assets/car-3.jpg";
@@ -78,6 +79,38 @@ const suvSlides = [
 export const Hero = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [condition, setCondition] = useState<"used" | "new">("used");
+  const [vehicleType, setVehicleType] = useState("cars");
+  const [brand, setBrand] = useState("any");
+  const [location, setLocation] = useState("");
+
+  useEffect(() => {
+    try {
+      const cached = sessionStorage.getItem("autonext_user_location");
+      if (cached) {
+        const p = JSON.parse(cached);
+        if (p.place) setLocation(p.place);
+      }
+    } catch {}
+    const onStorage = () => {
+      const cached = sessionStorage.getItem("autonext_user_location");
+      if (cached) {
+        const p = JSON.parse(cached);
+        if (p.place) setLocation(p.place);
+      }
+    };
+    const id = setInterval(onStorage, 2000);
+    return () => clearInterval(id);
+  }, []);
+
+  const brandsByType: Record<string, string[]> = {
+    cars: ["Maruti", "Hyundai", "Tata", "Mahindra", "Toyota", "Honda", "Kia", "BMW", "Mercedes-Benz"],
+    bikes: ["Royal Enfield", "Bajaj", "TVS", "Hero", "Yamaha", "KTM", "Honda", "Suzuki"],
+    trucks: ["Tata", "Ashok Leyland", "Mahindra", "Eicher", "BharatBenz"],
+    ev: ["Tata", "MG", "BYD", "Ola Electric", "Ather", "Mahindra"],
+    tractors: ["Mahindra", "Sonalika", "John Deere", "Massey Ferguson", "Eicher"],
+    cycles: ["Hero", "Atlas", "Btwin", "Firefox", "Giant"],
+  };
 
   const scrollNext = useCallback(() => {
     api?.scrollNext();
@@ -147,24 +180,56 @@ export const Hero = () => {
           </p>
 
           <div className="rounded-2xl border border-border bg-card p-3 shadow-card md:p-4">
-            <div className="grid gap-2 md:grid-cols-[1fr_1fr_auto]">
-              <Select defaultValue="cars">
+            <Tabs value={condition} onValueChange={(v) => setCondition(v as "used" | "new")} className="mb-3">
+              <TabsList className="grid w-full max-w-xs grid-cols-2">
+                <TabsTrigger value="used">Used</TabsTrigger>
+                <TabsTrigger value="new">New</TabsTrigger>
+              </TabsList>
+            </Tabs>
+            <div className="grid gap-2 md:grid-cols-[1fr_1fr_1fr_auto]">
+              <Select value={vehicleType} onValueChange={(v) => { setVehicleType(v); setBrand("any"); }}>
                 <SelectTrigger className="h-12">
-                  <SelectValue placeholder="Category" />
+                  <SelectValue placeholder="Vehicle type" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="cars">Cars</SelectItem>
                   <SelectItem value="bikes">Bikes</SelectItem>
-                  <SelectItem value="mobiles">Mobiles</SelectItem>
+                  <SelectItem value="trucks">Trucks</SelectItem>
+                  <SelectItem value="ev">EVs</SelectItem>
+                  <SelectItem value="tractors">Tractors</SelectItem>
+                  <SelectItem value="cycles">Cycles</SelectItem>
                 </SelectContent>
               </Select>
+
+              {condition === "new" ? (
+                <Select value={brand} onValueChange={setBrand}>
+                  <SelectTrigger className="h-12">
+                    <SelectValue placeholder="Brand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="any">Any brand</SelectItem>
+                    {(brandsByType[vehicleType] ?? []).map((b) => (
+                      <SelectItem key={b} value={b}>{b}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input className="h-12 pl-10" placeholder="Brand, model or keyword" />
+                </div>
+              )}
+
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   className="h-12 pl-10"
-                  placeholder="Brand, model or keyword"
+                  placeholder="Location / City"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </div>
+
               <Button size="lg" variant="hero" className="h-12">
                 Search
               </Button>
