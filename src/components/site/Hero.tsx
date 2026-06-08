@@ -179,70 +179,62 @@ export const Hero = () => {
             dashboard. Browse, compare and sell with confidence.
           </p>
 
-          <div className="rounded-2xl border border-border bg-card p-4 shadow-card md:p-5">
-            <div className="mb-3">
-              <h3 className="text-base font-bold text-foreground">Find your vehicle</h3>
-              <p className="text-xs text-muted-foreground">Tell us what you're looking for</p>
-            </div>
-
-            <Tabs value={condition} onValueChange={(v) => setCondition(v as "used" | "new")} className="mb-3">
-              <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="used">Used</TabsTrigger>
-                <TabsTrigger value="new">New</TabsTrigger>
+          <div className="rounded-xl border border-border bg-card p-3 shadow-card">
+            <Tabs value={condition} onValueChange={(v) => setCondition(v as "used" | "new")} className="mb-2">
+              <TabsList className="grid h-8 w-full grid-cols-2">
+                <TabsTrigger value="used" className="text-xs">Used</TabsTrigger>
+                <TabsTrigger value="new" className="text-xs">New</TabsTrigger>
               </TabsList>
             </Tabs>
 
-            <div className="space-y-3">
-              {/* Line 1: Vehicle type + Brand/keyword */}
+            <div className="space-y-2">
               <div className="grid gap-2 md:grid-cols-2">
                 <Select value={vehicleType} onValueChange={(v) => { setVehicleType(v); setBrand("any"); }}>
-                  <SelectTrigger className="h-11">
-                    <SelectValue placeholder="Vehicle type" />
+                  <SelectTrigger className="h-9 text-xs">
+                    <SelectValue placeholder="Type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="cars">Cars</SelectItem>
-                    <SelectItem value="bikes">Bikes</SelectItem>
-                    <SelectItem value="trucks">Trucks</SelectItem>
-                    <SelectItem value="ev">EVs</SelectItem>
-                    <SelectItem value="tractors">Tractors</SelectItem>
-                    <SelectItem value="cycles">Cycles</SelectItem>
+                    <SelectItem value="cars" className="text-xs">Cars</SelectItem>
+                    <SelectItem value="bikes" className="text-xs">Bikes</SelectItem>
+                    <SelectItem value="trucks" className="text-xs">Trucks</SelectItem>
+                    <SelectItem value="ev" className="text-xs">EVs</SelectItem>
+                    <SelectItem value="tractors" className="text-xs">Tractors</SelectItem>
+                    <SelectItem value="cycles" className="text-xs">Cycles</SelectItem>
                   </SelectContent>
                 </Select>
 
                 {condition === "new" ? (
                   <Select value={brand} onValueChange={setBrand}>
-                    <SelectTrigger className="h-11">
+                    <SelectTrigger className="h-9 text-xs">
                       <SelectValue placeholder="Brand" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="any">Any brand</SelectItem>
+                      <SelectItem value="any" className="text-xs">Any brand</SelectItem>
                       {(brandsByType[vehicleType] ?? []).map((b) => (
-                        <SelectItem key={b} value={b}>{b}</SelectItem>
+                        <SelectItem key={b} value={b} className="text-xs">{b}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 ) : (
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-                    <Input className="h-11 pl-10" placeholder="Brand, model or keyword" />
+                    <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                    <Input className="h-9 pl-9 text-xs" placeholder="Keyword" />
                   </div>
                 )}
               </div>
 
-              {/* Line 2: Location */}
               <div className="relative">
-                <MapPin className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                <MapPin className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                 <Input
-                  className="h-11 pl-10"
-                  placeholder="Location / City"
+                  className="h-9 pl-9 text-xs"
+                  placeholder="City"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 />
               </div>
 
-              {/* Line 3: Submit */}
-              <Button size="lg" variant="hero" className="h-11 w-full">
-                <Search className="mr-2 h-4 w-4" /> Search vehicles
+              <Button size="sm" variant="hero" className="h-9 w-full text-xs">
+                <Search className="mr-1.5 h-3.5 w-3.5" /> Search
               </Button>
             </div>
           </div>
