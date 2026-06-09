@@ -179,63 +179,62 @@ export const Hero = () => {
             dashboard. Browse, compare and sell with confidence.
           </p>
 
-          <div className="rounded-lg border border-border bg-card p-2 shadow-card">
-            <div className="flex flex-wrap items-center gap-1.5">
-              <Tabs value={condition} onValueChange={(v) => setCondition(v as "used" | "new")}>
-                <TabsList className="grid h-7 w-[110px] grid-cols-2">
-                  <TabsTrigger value="used" className="text-[10px] px-1">Used</TabsTrigger>
-                  <TabsTrigger value="new" className="text-[10px] px-1">New</TabsTrigger>
-                </TabsList>
-              </Tabs>
+          <div className="max-w-sm rounded-lg border border-border bg-card p-3 shadow-card space-y-2">
+            <Tabs value={condition} onValueChange={(v) => setCondition(v as "used" | "new")}>
+              <TabsList className="grid h-8 w-full grid-cols-2">
+                <TabsTrigger value="used" className="text-xs">Used</TabsTrigger>
+                <TabsTrigger value="new" className="text-xs">New</TabsTrigger>
+              </TabsList>
+            </Tabs>
 
-              <Select value={vehicleType} onValueChange={(v) => { setVehicleType(v); setBrand("any"); }}>
-                <SelectTrigger className="h-7 w-[80px] text-[10px] px-2">
-                  <SelectValue placeholder="Type" />
+            <Select value={vehicleType} onValueChange={(v) => { setVehicleType(v); setBrand("any"); }}>
+              <SelectTrigger className="h-9 w-full text-xs">
+                <SelectValue placeholder="Vehicle type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="cars" className="text-xs">Cars</SelectItem>
+                <SelectItem value="bikes" className="text-xs">Bikes</SelectItem>
+                <SelectItem value="trucks" className="text-xs">Trucks</SelectItem>
+                <SelectItem value="ev" className="text-xs">EVs</SelectItem>
+                <SelectItem value="tractors" className="text-xs">Tractors</SelectItem>
+                <SelectItem value="cycles" className="text-xs">Cycles</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {condition === "new" ? (
+              <Select value={brand} onValueChange={setBrand}>
+                <SelectTrigger className="h-9 w-full text-xs">
+                  <SelectValue placeholder="Brand / Model" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="cars" className="text-xs">Cars</SelectItem>
-                  <SelectItem value="bikes" className="text-xs">Bikes</SelectItem>
-                  <SelectItem value="trucks" className="text-xs">Trucks</SelectItem>
-                  <SelectItem value="ev" className="text-xs">EVs</SelectItem>
-                  <SelectItem value="tractors" className="text-xs">Tractors</SelectItem>
-                  <SelectItem value="cycles" className="text-xs">Cycles</SelectItem>
+                  <SelectItem value="any" className="text-xs">Any Brand</SelectItem>
+                  {(brandsByType[vehicleType] ?? []).map((b) => (
+                    <SelectItem key={b} value={b} className="text-xs">{b}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
-
-              {condition === "new" ? (
-                <Select value={brand} onValueChange={setBrand}>
-                  <SelectTrigger className="h-7 w-[100px] text-[10px] px-2">
-                    <SelectValue placeholder="Brand" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="any" className="text-xs">Any</SelectItem>
-                    {(brandsByType[vehicleType] ?? []).map((b) => (
-                      <SelectItem key={b} value={b} className="text-xs">{b}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              ) : (
-                <div className="relative flex-1 min-w-[80px]">
-                  <Search className="absolute left-2 top-1/2 h-3 w-3 -translate-y-1/2 text-muted-foreground" />
-                  <Input className="h-7 pl-7 text-[10px]" placeholder="Keyword" />
-                </div>
-              )}
-
-              <div className="relative flex-1 min-w-[80px]">
-                <MapPin className="absolute left-2 top-1/2 h-3 w-3 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  className="h-7 pl-7 text-[10px]"
-                  placeholder="City"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
+            ) : (
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+                <Input className="h-9 w-full pl-9 text-xs" placeholder="Brand / Model" />
               </div>
+            )}
 
-              <Button size="sm" variant="hero" className="h-7 px-3 text-[10px]">
-                <Search className="mr-1 h-3 w-3" /> Search
-              </Button>
+            <div className="relative">
+              <MapPin className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
+              <Input
+                className="h-9 w-full pl-9 text-xs"
+                placeholder="Location / City"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
             </div>
+
+            <Button size="sm" variant="hero" className="h-9 w-full text-xs">
+              <Search className="mr-1.5 h-3.5 w-3.5" /> Search
+            </Button>
           </div>
+
 
           <div className="flex flex-wrap gap-6 pt-2 text-sm">
             <Stat n="50K+" label="Listings" />
