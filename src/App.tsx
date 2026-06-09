@@ -26,6 +26,14 @@ import Press from "./pages/Press.tsx";
 import { EnquiryPopup } from "./components/site/EnquiryPopup";
 import { GeolocationPrompt } from "./components/site/GeolocationPrompt";
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [pathname]);
+  return null;
+};
+
 const queryClient = new QueryClient();
 
 const App = () => (
