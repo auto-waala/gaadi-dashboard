@@ -48,6 +48,7 @@ const Index = () => {
       <main>
         <Hero />
         <TrendingCars />
+        <CarSection section="featured" />
         <CarSection section="newlyarrived" />
         <CarSection section="premium" />
         <CarSection section="upcoming" />

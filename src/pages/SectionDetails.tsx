@@ -41,7 +41,7 @@ import {
 } from "@/data/vehicleDetails";
 import { CertifiedStamp } from "@/components/site/CertifiedStamp";
 
-const VALID: SectionKey[] = ["newlyarrived", "premium", "upcoming"];
+const VALID: SectionKey[] = ["newlyarrived", "premium", "upcoming", "featured"];
 
 const SectionDetails = () => {
   const { section = "", id = "" } = useParams();
