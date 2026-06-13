@@ -172,6 +172,8 @@ const RegisterForm = ({ onDone }: { onDone: () => void }) => {
   };
 
   return (
+    <>
+    <GoogleButton />
     <form onSubmit={submit} className="mt-4 space-y-3">
       <div className="grid grid-cols-2 gap-2">
         <div className="space-y-1.5">
