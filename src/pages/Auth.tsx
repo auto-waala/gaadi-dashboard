@@ -116,6 +116,8 @@ const LoginForm = ({ onForgot }: { onForgot: () => void }) => {
   };
 
   return (
+    <>
+    <GoogleButton />
     <form onSubmit={submit} className="mt-4 space-y-3">
       <div className="space-y-1.5">
         <Label htmlFor="lemail">Email</Label>
