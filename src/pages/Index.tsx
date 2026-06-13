@@ -47,11 +47,11 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
-        <TrendingCars />
         <CarSection section="featured" />
         <CarSection section="newlyarrived" />
         <CarSection section="premium" />
         <CarSection section="upcoming" />
+        <TrendingCars />
         <section id="listings" className="container pb-16">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
