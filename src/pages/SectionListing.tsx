@@ -5,7 +5,7 @@ import { ArrowLeft, MapPin, Star, Fuel, Cog } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { sectionCars, sectionMeta, type SectionKey } from "@/data/sections";
 
-const VALID: SectionKey[] = ["newlyarrived", "premium", "upcoming"];
+const VALID: SectionKey[] = ["newlyarrived", "premium", "upcoming", "featured"];
 
 const SectionListing = () => {
   const { section = "" } = useParams();

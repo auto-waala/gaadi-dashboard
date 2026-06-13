@@ -22,7 +22,7 @@ export type SectionCar = {
   badge?: string;
 };
 
-export type SectionKey = "newlyarrived" | "premium" | "upcoming";
+export type SectionKey = "newlyarrived" | "premium" | "upcoming" | "featured";
 
 export const sectionMeta: Record<
   SectionKey,
