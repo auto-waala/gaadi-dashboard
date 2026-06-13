@@ -201,6 +201,7 @@ const RegisterForm = ({ onDone }: { onDone: () => void }) => {
         {busy ? "Creating..." : "Create account"}
       </Button>
     </form>
+    </>
   );
 };
 
