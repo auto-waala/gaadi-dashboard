@@ -25,6 +25,7 @@ import Blog from "./pages/Blog.tsx";
 import Press from "./pages/Press.tsx";
 import { EnquiryPopup } from "./components/site/EnquiryPopup";
 import { GeolocationPrompt } from "./components/site/GeolocationPrompt";
+import { VisitorTracker } from "./components/site/VisitorTracker";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -43,6 +44,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
+        <VisitorTracker />
         <AuthProvider>
           <Routes>
             <Route path="/" element={<Index />} />
