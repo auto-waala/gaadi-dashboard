@@ -46,6 +46,12 @@ export const sectionMeta: Record<
     description: "Most-awaited cars launching in India over the next few months.",
     badgeClass: "bg-primary",
   },
+  featured: {
+    title: "Featured vehicles",
+    tag: "Featured",
+    description: "Top-rated picks chosen by our experts for the best value and condition.",
+    badgeClass: "bg-rose-500",
+  },
 };
 
 export const sectionCars: Record<SectionKey, SectionCar[]> = {
@@ -72,6 +78,14 @@ export const sectionCars: Record<SectionKey, SectionCar[]> = {
     { id: "u4", title: "Tata Harrier EV", price: "Expected ₹ 25,00,000", year: 2026, location: "Pan India", image: car2, fuel: "Electric", transmission: "Automatic", badge: "Coming Soon" },
     { id: "u5", title: "Kia Syros", price: "Expected ₹ 10,00,000", year: 2026, location: "Pan India", image: car3, fuel: "Petrol", transmission: "Automatic", badge: "Coming Soon" },
     { id: "u6", title: "BMW iX1 LWB", price: "Expected ₹ 60,00,000", year: 2026, location: "Pan India", image: bmw, fuel: "Electric", transmission: "Automatic", badge: "Coming Soon" },
+  ],
+  featured: [
+    { id: "f1", title: "Honda City ZX CVT", price: "₹ 14,85,000", year: 2023, location: "Delhi", image: car2, fuel: "Petrol", transmission: "Automatic", rating: 4.7, badge: "Featured" },
+    { id: "f2", title: "Toyota Fortuner 4x4 AT", price: "₹ 42,30,000", year: 2024, location: "Mumbai", image: thar, fuel: "Diesel", transmission: "Automatic", rating: 4.6, badge: "Featured" },
+    { id: "f3", title: "MG Hector Plus Sharp", price: "₹ 22,10,000", year: 2024, location: "Bengaluru", image: creta, fuel: "Petrol", transmission: "Automatic", rating: 4.5, badge: "Featured" },
+    { id: "f4", title: "Skoda Kushaq Monte Carlo", price: "₹ 18,50,000", year: 2023, location: "Pune", image: car4, fuel: "Petrol", transmission: "Automatic", rating: 4.6, badge: "Featured" },
+    { id: "f5", title: "Jeep Compass S 4x4", price: "₹ 32,70,000", year: 2024, location: "Hyderabad", image: vw, fuel: "Diesel", transmission: "Automatic", rating: 4.5, badge: "Featured" },
+    { id: "f6", title: "Citroen C5 Aircross", price: "₹ 36,90,000", year: 2024, location: "Chennai", image: car3, fuel: "Diesel", transmission: "Automatic", rating: 4.7, badge: "Featured" },
   ],
 };
 
