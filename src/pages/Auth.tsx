@@ -136,6 +136,7 @@ const LoginForm = ({ onForgot }: { onForgot: () => void }) => {
         {busy ? "Signing in..." : "Login"}
       </Button>
     </form>
+    </>
   );
 };
 
