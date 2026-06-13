@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Facebook, Instagram, Twitter, Youtube, Linkedin, Apple, PlayCircle } from "lucide-react";
 import logo from "@/assets/logo-autonext.png";
+import { VisitorCount } from "./VisitorCount";
 
 const cols = [
   {
@@ -209,7 +210,10 @@ export const Footer = () => {
       {/* Bottom */}
       <div className="border-t border-border">
         <div className="container flex flex-col items-center justify-between gap-3 py-5 text-xs text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} Betalen Technologies Pvt. Ltd. — Made with ♥ in India</div>
+          <div className="flex items-center gap-3">
+            <span>© {new Date().getFullYear()} Betalen Technologies Pvt. Ltd. — Made with ♥ in India</span>
+            <VisitorCount />
+          </div>
           <div className="flex gap-4">
             <a href="/privacy" className="hover:text-primary">Privacy</a>
             <a href="/terms" className="hover:text-primary">Terms</a>
