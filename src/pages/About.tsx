@@ -1,10 +1,22 @@
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { SEO } from "@/components/site/SEO";
 
 const AboutUs = () => {
     return (
         <div className="min-h-screen bg-background">
+            <SEO
+                title="About AutoNext — India's Trusted Vehicle Marketplace for Cars, Bikes & Trucks"
+                description="AutoNext is a Hyderabad-based startup connecting buyers and dealers across India for new and used cars, bikes, EVs, trucks and commercial vehicles with trust, transparency and financing."
+                keywords={[
+                    "about AutoNext","vehicle marketplace India","buy used cars India",
+                    "sell used cars India","car dealers Hyderabad","bike marketplace",
+                    "truck marketplace","EV marketplace India","vehicle financing",
+                    "auto loans India","trusted car platform","Indian automotive startup",
+                ]}
+            />
             <Header />
+
 
             <main className="container py-12 max-w-4xl">
                 <h1 className="text-3xl font-bold mb-4">About AutoNext</h1>

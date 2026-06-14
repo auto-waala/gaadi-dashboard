@@ -1,9 +1,18 @@
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { SEO } from "@/components/site/SEO";
 
 const Terms = () => {
     return (
         <div className="min-h-screen bg-background">
+            <SEO
+                title="Terms & Conditions — AutoNext"
+                description="Review AutoNext's terms and conditions for using our vehicle marketplace — usage rules, account responsibilities, listings and limitation of liability."
+                keywords={[
+                    "AutoNext terms","terms and conditions","vehicle marketplace terms",
+                    "user agreement","platform usage policy",
+                ]}
+            />
             <Header />
 
             <main className="container py-12 max-w-3xl">
