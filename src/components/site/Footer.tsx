@@ -34,7 +34,7 @@ const cols = [
       { label: "About Us", href: "/about" },
       { label: "Careers", href: "/careers" },
       { label: "Press", href: "/press" },
-      { label: "AutoNext Cares", href: "/cares" },
+      { label: "AutoNext Careers", href: "/careers" },
       { label: "Blog", href: "/blog" },
     ],
   },
