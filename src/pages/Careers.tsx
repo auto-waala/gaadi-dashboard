@@ -1,5 +1,6 @@
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { SEO } from "@/components/site/SEO";
 
 const jobs = [
     {
@@ -77,6 +78,16 @@ const jobs = [
 const Careers = () => {
     return (
         <div className="min-h-screen bg-background">
+            <SEO
+                title="Careers at AutoNext — Join India's Fastest Growing Vehicle Marketplace"
+                description="Explore 10+ open roles at AutoNext Hyderabad: .NET, React, Angular, Vue, Azure, QA, Project Manager and internships. Work on India's next-gen vehicle marketplace."
+                keywords={[
+                    "AutoNext careers","jobs at AutoNext","Hyderabad tech jobs",
+                    ".NET developer jobs","React jobs India","Angular developer jobs",
+                    "Vue.js jobs","Azure engineer jobs","QA automation jobs",
+                    "project manager jobs","fresher internship Hyderabad","startup jobs India",
+                ]}
+            />
             <Header />
 
             <main className="container py-12 max-w-4xl">

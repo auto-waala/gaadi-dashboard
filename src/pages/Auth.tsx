@@ -14,15 +14,15 @@ const GoogleButton = () => {
   const [busy, setBusy] = useState(false);
   const handleGoogle = async () => {
     setBusy(true);
-    const result = await lovable.auth.signInWithOAuth("google", {
+    const result: any = await lovable.auth.signInWithOAuth("google", {
       redirect_uri: window.location.origin,
     });
-    if (result.error) {
+    if (result?.error) {
       setBusy(false);
       toast({ title: "Google sign-in failed", description: String(result.error) });
       return;
     }
-    if (result.redirected) return;
+    if (result?.redirected) return;
   };
   return (
     <div className="mt-4 space-y-3">

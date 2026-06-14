@@ -1,9 +1,18 @@
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { SEO } from "@/components/site/SEO";
 
 const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="Privacy Policy — AutoNext"
+        description="Read AutoNext's privacy policy to understand how we collect, use, store and protect your personal data while you buy or sell vehicles on our platform."
+        keywords={[
+          "AutoNext privacy policy","data protection","user data privacy",
+          "vehicle marketplace privacy","personal data security India",
+        ]}
+      />
       <Header />
 
       <main className="container py-12 max-w-3xl">
