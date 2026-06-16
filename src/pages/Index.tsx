@@ -1,3 +1,4 @@
+// pages/Index.tsx
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { CarSection } from "@/components/site/CarSection";
@@ -12,8 +13,8 @@ import { Footer } from "@/components/site/Footer";
 import { CategoryGrid } from "@/components/site/CategoryGrid";
 import { ListingCard } from "@/components/site/ListingCard";
 import { Filters } from "@/components/site/Filters";
-import { listings } from "@/data/listings";
-import { useMemo, useState } from "react";
+import { useSmartLandingData } from "@/hooks/useSmartLandingData";
+import { useMemo, useState, useEffect } from "react";
 import { LayoutGrid, List, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,11 +29,269 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { listings } from "@/data/listings";
 
 const Index = () => {
   const [type, setType] = useState("All");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [sort, setSort] = useState("recent");
+
+  // ─── Smart Data Loading (Logging Only) ─────────────────────────────
+
+  const {
+    data,
+    loading,
+    progress,
+    activeSection,
+    isComplete,
+    featured,
+    newlyArrived,
+    premium,
+    upcoming,
+    used,
+    isLoadingFeatured,
+    isLoadingNewlyArrived,
+    isLoadingPremium,
+    isLoadingUpcoming,
+    isLoadingUsed,
+    loadMoreFeatured,
+    loadMoreNewlyArrived,
+    loadMorePremium,
+    loadMoreUpcoming,
+    loadMoreUsed,
+    refetch,
+  } = useSmartLandingData();
+
+  // ─── Log API Data ──────────────────────────────────────────────────
+
+  useEffect(() => {
+    // Log when data changes
+    if (data) {
+      console.log('📊 [Index] Smart Landing Data Update:', {
+        featured: {
+          count: data.featured?.length || 0,
+          loading: loading.featured,
+          firstItem: data.featured?.[0]?.title || 'N/A',
+        },
+        newlyArrived: {
+          count: data.newlyArrived?.length || 0,
+          loading: loading.newlyArrived,
+          firstItem: data.newlyArrived?.[0]?.title || 'N/A',
+        },
+        premium: {
+          count: data.premium?.length || 0,
+          loading: loading.premium,
+          firstItem: data.premium?.[0]?.title || 'N/A',
+        },
+        upcoming: {
+          count: data.upcoming?.length || 0,
+          loading: loading.upcoming,
+          firstItem: data.upcoming?.[0]?.title || 'N/A',
+        },
+        used: {
+          count: data.used?.length || 0,
+          loading: loading.used,
+          firstItem: data.used?.[0]?.title || 'N/A',
+        },
+        progress: progress,
+        activeSection: activeSection,
+        isComplete: isComplete,
+      });
+    }
+  }, [data, loading, progress, activeSection, isComplete]);
+
+  // ─── Log Individual Section Data ────────────────────────────────────
+
+  useEffect(() => {
+    if (featured.length > 0) {
+      console.log('🚗 Featured Vehicles Loaded:', {
+        count: featured.length,
+        vehicles: featured.map(v => ({
+          id: v.id,
+          title: v.title,
+          price: v.price?.formattedPrice,
+          brand: v.brandName,
+          model: v.modelName,
+        })),
+      });
+    }
+  }, [featured]);
+
+  useEffect(() => {
+    if (newlyArrived.length > 0) {
+      console.log('✨ Newly Arrived Vehicles Loaded:', {
+        count: newlyArrived.length,
+        vehicles: newlyArrived.map(v => ({
+          id: v.id,
+          title: v.title,
+          price: v.price?.formattedPrice,
+          brand: v.brandName,
+          model: v.modelName,
+        })),
+      });
+    }
+  }, [newlyArrived]);
+
+  useEffect(() => {
+    if (premium.length > 0) {
+      console.log('💎 Premium Vehicles Loaded:', {
+        count: premium.length,
+        vehicles: premium.map(v => ({
+          id: v.id,
+          title: v.title,
+          price: v.price?.formattedPrice,
+          brand: v.brandName,
+          model: v.modelName,
+        })),
+      });
+    }
+  }, [premium]);
+
+  useEffect(() => {
+    if (upcoming.length > 0) {
+      console.log('🚀 Upcoming Vehicles Loaded:', {
+        count: upcoming.length,
+        vehicles: upcoming.map(v => ({
+          id: v.id,
+          title: v.title,
+          price: v.price?.formattedPrice,
+          brand: v.brandName,
+          model: v.modelName,
+        })),
+      });
+    }
+  }, [upcoming]);
+
+  useEffect(() => {
+    if (used.length > 0) {
+      console.log('🔄 Used Vehicles Loaded:', {
+        count: used.length,
+        vehicles: used.map(v => ({
+          id: v.id,
+          title: v.title,
+          price: v.price?.formattedPrice,
+          brand: v.brandName,
+          model: v.modelName,
+        })),
+      });
+    }
+  }, [used]);
+
+  // ─── Log Loading Status ─────────────────────────────────────────────
+
+  useEffect(() => {
+    console.log('⏳ Loading Status:', {
+      featured: isLoadingFeatured,
+      newlyArrived: isLoadingNewlyArrived,
+      premium: isLoadingPremium,
+      upcoming: isLoadingUpcoming,
+      used: isLoadingUsed,
+      progress: `${progress}%`,
+      activeSection,
+      isComplete,
+    });
+  }, [
+    isLoadingFeatured,
+    isLoadingNewlyArrived,
+    isLoadingPremium,
+    isLoadingUpcoming,
+    isLoadingUsed,
+    progress,
+    activeSection,
+    isComplete,
+  ]);
+
+  // ─── Log When Complete ──────────────────────────────────────────────
+
+  useEffect(() => {
+    if (isComplete) {
+      console.log('🎉 All sections loaded successfully!');
+      console.log('📊 Final Data Summary:', {
+        totalVehicles: 
+          featured.length + 
+          newlyArrived.length + 
+          premium.length + 
+          upcoming.length + 
+          used.length,
+        sections: {
+          featured: featured.length,
+          newlyArrived: newlyArrived.length,
+          premium: premium.length,
+          upcoming: upcoming.length,
+          used: used.length,
+        },
+      });
+    }
+  }, [isComplete, featured, newlyArrived, premium, upcoming, used]);
+
+  // ─── Log Load More Events ───────────────────────────────────────────
+
+  const handleLoadMoreFeatured = async () => {
+    console.log('📥 Loading more featured vehicles...');
+    try {
+      const result = await loadMoreFeatured();
+      console.log('✅ Load more featured result:', {
+        newItems: result?.items?.length || 0,
+        total: result?.totalCount || 0,
+      });
+    } catch (error) {
+      console.error('❌ Load more featured failed:', error);
+    }
+  };
+
+  const handleLoadMoreNewlyArrived = async () => {
+    console.log('📥 Loading more newly arrived vehicles...');
+    try {
+      const result = await loadMoreNewlyArrived();
+      console.log('✅ Load more newly arrived result:', {
+        newItems: result?.items?.length || 0,
+        total: result?.totalCount || 0,
+      });
+    } catch (error) {
+      console.error('❌ Load more newly arrived failed:', error);
+    }
+  };
+
+  const handleLoadMorePremium = async () => {
+    console.log('📥 Loading more premium vehicles...');
+    try {
+      const result = await loadMorePremium();
+      console.log('✅ Load more premium result:', {
+        newItems: result?.items?.length || 0,
+        total: result?.totalCount || 0,
+      });
+    } catch (error) {
+      console.error('❌ Load more premium failed:', error);
+    }
+  };
+
+  const handleLoadMoreUpcoming = async () => {
+    console.log('📥 Loading more upcoming vehicles...');
+    try {
+      const result = await loadMoreUpcoming();
+      console.log('✅ Load more upcoming result:', {
+        newItems: result?.items?.length || 0,
+        total: result?.totalCount || 0,
+      });
+    } catch (error) {
+      console.error('❌ Load more upcoming failed:', error);
+    }
+  };
+
+  const handleLoadMoreUsed = async () => {
+    console.log('📥 Loading more used vehicles...');
+    try {
+      const result = await loadMoreUsed();
+      console.log('✅ Load more used result:', {
+        newItems: result?.items?.length || 0,
+        total: result?.totalCount || 0,
+      });
+    } catch (error) {
+      console.error('❌ Load more used failed:', error);
+    }
+  };
+
+  // ─── Filter Logic (Using Static Data) ──────────────────────────────
 
   const filtered = useMemo(() => {
     let arr = [...listings];
@@ -47,11 +306,16 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        
+        {/* ─── Car Sections (Keep as is) ────────────────────────────── */}
         <CarSection section="featured" />
         <CarSection section="newlyarrived" />
         <CarSection section="premium" />
         <CarSection section="upcoming" />
+        
         <TrendingCars />
+        
+        {/* ─── Fresh Listings (Keep as is) ──────────────────────────── */}
         <section id="listings" className="container pb-16">
           <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -120,6 +384,7 @@ const Index = () => {
             </div>
           </div>
         </section>
+        
         <CategoryGrid active={type} onChange={setType} />
         <BrandCategories />
         <BankPartners />
