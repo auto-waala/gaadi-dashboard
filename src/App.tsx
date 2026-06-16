@@ -1,10 +1,12 @@
+// App.tsx
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
+import { SilentDataLoader } from "@/components/SilentDataLoader"; // Import this
 import Index from "./pages/Index.tsx";
 import ListingDetails from "./pages/ListingDetails.tsx";
 import Auth from "./pages/Auth.tsx";
@@ -35,7 +37,16 @@ const ScrollToTop = () => {
   return null;
 };
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000,
+      gcTime: 10 * 60 * 1000,
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -46,6 +57,7 @@ const App = () => (
         <ScrollToTop />
         <VisitorTracker />
         <AuthProvider>
+          <SilentDataLoader />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/listing/:id" element={<ListingDetails />} />
@@ -64,9 +76,9 @@ const App = () => (
             <Route path="/press" element={<Press />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/blog" element={<Blog />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+
           <EnquiryPopup />
           <GeolocationPrompt />
         </AuthProvider>

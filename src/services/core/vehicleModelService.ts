@@ -1,6 +1,6 @@
 // services/vehicleModelService.ts
 import { VehicleModelResponse } from "@/models/vehicleModelResponse";
-import { apiClient } from "@/services/apiClient";
+import apiClient from "@/services/apiClient";
 
 class VehicleModelService {
     // Get all vehicle models
@@ -8,7 +8,7 @@ class VehicleModelService {
         const response = await apiClient.get<{ success: boolean; data: VehicleModelResponse[] }>(
             '/vehicle-models'
         );
-        return response.data.data;
+        return response.data;
     }
 
     // Get models by brand ID
@@ -16,7 +16,7 @@ class VehicleModelService {
         const response = await apiClient.get<{ success: boolean; data: VehicleModelResponse[] }>(
             `/vehicle-models/brand/${brandId}`
         );
-        return response.data.data;
+        return response.data;
     }
 
     // Get model by ID
@@ -24,7 +24,7 @@ class VehicleModelService {
         const response = await apiClient.get<{ success: boolean; data: VehicleModelResponse }>(
             `/vehicle-models/${id}`
         );
-        return response.data.success ? response.data.data : null;
+        return response.data.success ? response.data : null;
     }
 
     // Get models by vehicle type
@@ -32,7 +32,7 @@ class VehicleModelService {
         const response = await apiClient.get<{ success: boolean; data: VehicleModelResponse[] }>(
             `/vehicle-models/vehicle-type/${vehicleTypeId}`
         );
-        return response.data.data;
+        return response.data;
     }
 }
 
