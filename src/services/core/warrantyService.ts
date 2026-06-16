@@ -1,7 +1,7 @@
 // services/warrantyService.ts
 import { WarrantyTypeResponse } from "@/models/warrantyTypeResponse";
 import {  WarrantyComparison } from "@/models/warrantyComparison";
-import { apiClient } from "@/services/apiClient";
+import apiClient from "@/services/apiClient";
 
 class WarrantyService {
     // Get all warranties
@@ -9,7 +9,7 @@ class WarrantyService {
         const response = await apiClient.get<{ success: boolean; data: WarrantyTypeResponse[] }>(
             '/warranties'
         );
-        return response.data.data;
+        return response.data;
     }
 
     // Get warranty by ID
@@ -17,7 +17,7 @@ class WarrantyService {
         const response = await apiClient.get<{ success: boolean; data: WarrantyTypeResponse }>(
             `/warranties/${id}`
         );
-        return response.data.success ? response.data.data : null;
+        return response.data.success ? response.data : null;
     }
 
     // Compare two warranties
@@ -25,7 +25,7 @@ class WarrantyService {
         const response = await apiClient.get<{ success: boolean; data: WarrantyComparison }>(
             `/warranties/compare/${warrantyIdA}/${warrantyIdB}`
         );
-        return response.data.data;
+        return response.data;
     }
 }
 

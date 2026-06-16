@@ -1,7 +1,7 @@
 // services/documentTypeService.ts
 import { DocumentTypeResponse } from "@/models/documentTypeResponse";
 import { DocumentTypeCategory } from "@/models/documentTypeCategory";
-import { apiClient } from "@/services/apiClient";
+import apiClient from "@/services/apiClient";
 
 class DocumentTypeService {
     // Get all document types
@@ -9,7 +9,7 @@ class DocumentTypeService {
         const response = await apiClient.get<{ success: boolean; data: DocumentTypeResponse[] }>(
             '/document-types'
         );
-        return response.data.data;
+        return response.data;
     }
 
     // Get document types by category
@@ -17,7 +17,7 @@ class DocumentTypeService {
         const response = await apiClient.get<{ success: boolean; data: DocumentTypeCategory[] }>(
             '/document-types/by-category'
         );
-        return response.data.data;
+        return response.data;
     }
 
     // Get document type by ID
@@ -25,7 +25,7 @@ class DocumentTypeService {
         const response = await apiClient.get<{ success: boolean; data: DocumentTypeResponse }>(
             `/document-types/${id}`
         );
-        return response.data.success ? response.data.data : null;
+        return response.data.success ? response.data : null;
     }
 }
 

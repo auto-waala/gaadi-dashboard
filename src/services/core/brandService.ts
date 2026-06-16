@@ -1,6 +1,6 @@
 // services/brandService.ts
 import { BrandResponse } from "@/models/brandResponse";
-import { apiClient } from "@/services/apiClient";
+import apiClient from "@/services/apiClient";
 import { ApiEndpoints } from "@/services/apiEndpoints";
 
 class BrandService {
@@ -9,7 +9,7 @@ class BrandService {
         const response = await apiClient.get<{ success: boolean; data: BrandResponse[] }>(
             ApiEndpoints.Brands.Base
         );
-        return response.data.data;
+        return response.data;
     }
 
     // Get active brands only
@@ -17,28 +17,28 @@ class BrandService {
         const response = await apiClient.get<{ success: boolean; data: BrandResponse[] }>(
             ApiEndpoints.Brands.Active
         );
-        return response.data.data;
+        return response.data;
     }
 
     // Get brand by ID
     async getBrandById(id: number): Promise<BrandResponse | null> {
         const url = ApiEndpoints.Brands.ById.replace('{brandId}', String(id));
         const response = await apiClient.get<{ success: boolean; data: BrandResponse }>(url);
-        return response.data.success ? response.data.data : null;
+        return response.data.success ? response.data : null;
     }
 
     // Get brands by category code
     async getBrandsByCategory(categoryCode: string): Promise<BrandResponse[]> {
         const url = ApiEndpoints.Brands.ByCategory.replace('{categoryCode}', categoryCode);
         const response = await apiClient.get<{ success: boolean; data: BrandResponse[] }>(url);
-        return response.data.data;
+        return response.data;
     }
 
     // Get brands by country code
     async getBrandsByCountry(countryCode: string): Promise<BrandResponse[]> {
         const url = ApiEndpoints.Brands.ByCountry.replace('{countryCode}', countryCode);
         const response = await apiClient.get<{ success: boolean; data: BrandResponse[] }>(url);
-        return response.data.data;
+        return response.data;
     }
 }
 
