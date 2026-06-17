@@ -232,7 +232,7 @@ const Index = () => {
       const result = await loadMoreFeatured();
       console.log('✅ Load more featured result:', {
         newItems: result?.items?.length || 0,
-        total: result?.totalCount || 0,
+        total: result?.items?.length || 0,
       });
     } catch (error) {
       console.error('❌ Load more featured failed:', error);
@@ -245,7 +245,7 @@ const Index = () => {
       const result = await loadMoreNewlyArrived();
       console.log('✅ Load more newly arrived result:', {
         newItems: result?.items?.length || 0,
-        total: result?.totalCount || 0,
+        total: result?.items?.length || 0,
       });
     } catch (error) {
       console.error('❌ Load more newly arrived failed:', error);
@@ -258,7 +258,7 @@ const Index = () => {
       const result = await loadMorePremium();
       console.log('✅ Load more premium result:', {
         newItems: result?.items?.length || 0,
-        total: result?.totalCount || 0,
+        total: result?.items?.length || 0,
       });
     } catch (error) {
       console.error('❌ Load more premium failed:', error);
@@ -271,7 +271,7 @@ const Index = () => {
       const result = await loadMoreUpcoming();
       console.log('✅ Load more upcoming result:', {
         newItems: result?.items?.length || 0,
-        total: result?.totalCount || 0,
+        total: result?.items?.length || 0,
       });
     } catch (error) {
       console.error('❌ Load more upcoming failed:', error);
@@ -284,7 +284,7 @@ const Index = () => {
       const result = await loadMoreUsed();
       console.log('✅ Load more used result:', {
         newItems: result?.items?.length || 0,
-        total: result?.totalCount || 0,
+        total: result?.items?.length || 0,
       });
     } catch (error) {
       console.error('❌ Load more used failed:', error);
