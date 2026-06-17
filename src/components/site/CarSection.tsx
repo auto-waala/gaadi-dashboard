@@ -31,7 +31,7 @@ export const CarSection = ({ section }: { section: SectionKey }) => {
           <p className="text-sm text-muted-foreground">{meta.description}</p>
         </div>
         <Link
-          to={`/${section}/cars`}
+          to={`/${section}/all`}
           className="hidden text-sm font-semibold text-primary hover:underline md:inline"
         >
           View all →

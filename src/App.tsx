@@ -66,8 +66,9 @@ const App = () => (
             <Route path="/sell" element={<SellOnboarding />} />
             <Route path="/dashboard" element={<SellerDashboard />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
-            <Route path="/:section/cars" element={<SectionListing />} />
             <Route path="/:section/cars/:id" element={<SectionDetails />} />
+            <Route path="/:section/all" element={<SectionListing />} />
+            <Route path="/:section/:category" element={<SectionListing />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
             <Route path="/cookies" element={<CookiesPolicy />} />
