@@ -1,9 +1,10 @@
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, MapPin, Star, Fuel, Cog, SlidersHorizontal } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
 import {
   Select,
   SelectContent,
@@ -21,16 +22,30 @@ import { useMemo, useState } from "react";
 
 const VALID: SectionKey[] = ["newlyarrived", "premium", "upcoming", "featured"];
 
-// Category labels surfaced as tabs/filters. "all" means no category filter.
+// Type tabs (URL category). Extra labels map to "all".
+const TYPES = [
+  { label: "All", value: "all" },
+  { label: "Cars", value: "cars" },
+  { label: "EV", value: "ev" },
+  { label: "Bikes", value: "bikes" },
+  { label: "Cycles", value: "all" },
+  { label: "Trucks", value: "trucks" },
+  { label: "Tractors", value: "all" },
+  { label: "Buses", value: "all" },
+  { label: "Auto/Rickshaw", value: "all" },
+  { label: "Spare Parts", value: "all" },
+] as const;
+
 const CATEGORIES = ["all", "cars", "ev", "bikes", "trucks"] as const;
 type Category = (typeof CATEGORIES)[number];
+
+const FUELS = ["Petrol", "Diesel", "Electric", "Hybrid"];
 
 const parsePrice = (s: string): number => {
   const n = s.replace(/[^\d]/g, "");
   return n ? parseInt(n, 10) : 0;
 };
 
-// Map a car to a category bucket based on fuel/title heuristics from mock data.
 const carCategory = (c: { fuel?: string; title: string }): Category => {
   if (c.fuel?.toLowerCase() === "electric") return "ev";
   const t = c.title.toLowerCase();
@@ -40,62 +55,127 @@ const carCategory = (c: { fuel?: string; title: string }): Category => {
 };
 
 const FilterPanel = ({
-  fuel,
-  setFuel,
+  sectionKey,
+  activeCat,
+  price,
+  setPrice,
+  selectedFuels,
+  toggleFuel,
+  applied,
+  apply,
+  reset,
+  transmissions,
   trans,
   setTrans,
-  fuels,
-  transmissions,
-  reset,
 }: {
-  fuel: string;
-  setFuel: (v: string) => void;
+  sectionKey: SectionKey;
+  activeCat: Category;
+  price: number[];
+  setPrice: (v: number[]) => void;
+  selectedFuels: string[];
+  toggleFuel: (f: string) => void;
+  applied: number;
+  apply: () => void;
+  reset: () => void;
+  transmissions: string[];
   trans: string;
   setTrans: (v: string) => void;
-  fuels: string[];
-  transmissions: string[];
-  reset: () => void;
 }) => (
   <aside className="space-y-6 rounded-xl border border-border bg-card p-5 shadow-card">
     <div>
-      <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">Fuel</h4>
+      <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">
+        Type
+      </h4>
       <div className="flex flex-wrap gap-2">
-        {["All", ...fuels].map((f) => (
-          <button
-            key={f}
-            onClick={() => setFuel(f)}
-            className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-smooth ${
-              fuel === f
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-border bg-background hover:border-primary/40"
-            }`}
-          >
-            {f}
-          </button>
-        ))}
+        {TYPES.map((t) => {
+          const isActive = t.value === activeCat;
+          return (
+            <Link
+              key={t.label}
+              to={`/${sectionKey}/${t.value}`}
+              className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-smooth ${
+                isActive
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-background hover:border-primary/40"
+              }`}
+            >
+              {t.label}
+            </Link>
+          );
+        })}
       </div>
     </div>
+
     <div>
-      <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">Transmission</h4>
-      <div className="flex flex-wrap gap-2">
-        {["All", ...transmissions].map((t) => (
-          <button
-            key={t}
-            onClick={() => setTrans(t)}
-            className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-smooth ${
-              trans === t
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-border bg-background hover:border-primary/40"
-            }`}
+      <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">
+        Price (INR)
+      </h4>
+      <Slider
+        value={price}
+        onValueChange={setPrice}
+        min={50000}
+        max={20000000}
+        step={50000}
+      />
+      <div className="mt-3 flex justify-between text-xs text-muted-foreground">
+        <span>{price[0].toLocaleString()}</span>
+        <span>{price[1].toLocaleString()}</span>
+      </div>
+    </div>
+
+    <div>
+      <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">
+        Fuel
+      </h4>
+      <div className="grid grid-cols-2 gap-2">
+        {FUELS.map((f) => (
+          <label
+            key={f}
+            className="flex cursor-pointer items-center gap-2 rounded-md border border-border px-3 py-2 text-xs hover:border-primary/40"
           >
-            {t}
-          </button>
+            <input
+              type="checkbox"
+              checked={selectedFuels.includes(f)}
+              onChange={() => toggleFuel(f)}
+              className="accent-[hsl(var(--primary))]"
+            />
+            {f}
+          </label>
         ))}
       </div>
     </div>
-    <Button variant="outline" className="w-full" onClick={reset}>
-      Reset filters
-    </Button>
+
+    {transmissions.length > 0 && (
+      <div>
+        <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-muted-foreground">
+          Transmission
+        </h4>
+        <div className="flex flex-wrap gap-2">
+          {["All", ...transmissions].map((t) => (
+            <button
+              key={t}
+              onClick={() => setTrans(t)}
+              className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition-smooth ${
+                trans === t
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border bg-background hover:border-primary/40"
+              }`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <div className="flex gap-2">
+      <Button variant="hero" className="flex-1" onClick={apply}>
+        Apply filters
+      </Button>
+      <Button variant="outline" onClick={reset}>
+        Reset
+      </Button>
+    </div>
   </aside>
 );
 
@@ -109,34 +189,61 @@ const SectionListing = () => {
   const meta = sectionMeta[key];
   const allCars = sectionCars[key];
 
-  const [fuel, setFuel] = useState("All");
+  const [price, setPrice] = useState<number[]>([50000, 20000000]);
+  const [selectedFuels, setSelectedFuels] = useState<string[]>([]);
   const [trans, setTrans] = useState("All");
   const [sort, setSort] = useState("recent");
+  const [applied, setApplied] = useState(0); // bump to trigger re-filter (currently filters live)
 
-  const fuels = useMemo(
-    () => Array.from(new Set(allCars.map((c) => c.fuel).filter(Boolean) as string[])),
-    [allCars],
-  );
   const transmissions = useMemo(
     () => Array.from(new Set(allCars.map((c) => c.transmission).filter(Boolean) as string[])),
     [allCars],
   );
 
+  const toggleFuel = (f: string) =>
+    setSelectedFuels((prev) =>
+      prev.includes(f) ? prev.filter((x) => x !== f) : [...prev, f],
+    );
+
   const filtered = useMemo(() => {
     let arr = [...allCars];
     if (cat !== "all") arr = arr.filter((c) => carCategory(c) === cat);
-    if (fuel !== "All") arr = arr.filter((c) => c.fuel === fuel);
+    if (selectedFuels.length > 0)
+      arr = arr.filter((c) => c.fuel && selectedFuels.includes(c.fuel));
     if (trans !== "All") arr = arr.filter((c) => c.transmission === trans);
+    arr = arr.filter((c) => {
+      const p = parsePrice(c.price);
+      if (!p) return true;
+      return p >= price[0] && p <= price[1];
+    });
     if (sort === "low") arr.sort((a, b) => parsePrice(a.price) - parsePrice(b.price));
     if (sort === "high") arr.sort((a, b) => parsePrice(b.price) - parsePrice(a.price));
     if (sort === "year") arr.sort((a, b) => b.year - a.year);
     return arr;
-  }, [allCars, cat, fuel, trans, sort]);
+  }, [allCars, cat, selectedFuels, trans, price, sort]);
 
   const reset = () => {
-    setFuel("All");
+    setPrice([50000, 20000000]);
+    setSelectedFuels([]);
     setTrans("All");
     setSort("recent");
+  };
+
+  const apply = () => setApplied((n) => n + 1);
+
+  const panelProps = {
+    sectionKey: key,
+    activeCat: cat,
+    price,
+    setPrice,
+    selectedFuels,
+    toggleFuel,
+    applied,
+    apply,
+    reset,
+    transmissions,
+    trans,
+    setTrans,
   };
 
   return (
@@ -158,23 +265,6 @@ const SectionListing = () => {
           <p className="text-sm text-muted-foreground">{meta.description}</p>
         </div>
 
-        {/* Category tabs */}
-        <div className="mb-6 flex flex-wrap gap-2">
-          {CATEGORIES.map((c) => (
-            <Link
-              key={c}
-              to={`/${key}/${c}`}
-              className={`rounded-full border px-4 py-1.5 text-xs font-semibold uppercase tracking-wide transition-smooth ${
-                cat === c
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-card hover:border-primary/40"
-              }`}
-            >
-              {c === "all" ? "All" : c.toUpperCase()}
-            </Link>
-          ))}
-        </div>
-
         {/* Toolbar */}
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-muted-foreground">
@@ -188,16 +278,8 @@ const SectionListing = () => {
                   <SlidersHorizontal className="mr-1 h-4 w-4" /> Filters
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[320px] p-4">
-                <FilterPanel
-                  fuel={fuel}
-                  setFuel={setFuel}
-                  trans={trans}
-                  setTrans={setTrans}
-                  fuels={fuels}
-                  transmissions={transmissions}
-                  reset={reset}
-                />
+              <SheetContent side="left" className="w-[340px] overflow-y-auto p-4">
+                <FilterPanel {...panelProps} />
               </SheetContent>
             </Sheet>
             <Select value={sort} onValueChange={setSort}>
@@ -214,17 +296,9 @@ const SectionListing = () => {
           </div>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-[280px_1fr]">
+        <div className="grid gap-6 lg:grid-cols-[300px_1fr]">
           <div className="hidden lg:block">
-            <FilterPanel
-              fuel={fuel}
-              setFuel={setFuel}
-              trans={trans}
-              setTrans={setTrans}
-              fuels={fuels}
-              transmissions={transmissions}
-              reset={reset}
-            />
+            <FilterPanel {...panelProps} />
           </div>
 
           {filtered.length === 0 ? (
